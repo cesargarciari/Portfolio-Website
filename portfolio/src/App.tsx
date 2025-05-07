@@ -1,6 +1,12 @@
+import NavBar from "./components/NavBar"
+
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <NavBar />
+    <div className="text-5xl">Hello, just starting</div>
+    </>
+    
   )
 }
 
