@@ -4,7 +4,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0c0c0c;
+  --color-primary: #111111;
 
   --color-light-100: #cecefb;
   --color-light-200: #a8b5db;
@@ -22,7 +22,7 @@
 @layer base {
   body {
     font-optical-sizing: auto;
-    background: #0c0c0c;
+    background: #111111;
   }
 
   h1 {
@@ -48,6 +48,7 @@
   .footer{
     @apply flex;
   }
+
 }
 
 
