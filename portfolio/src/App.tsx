@@ -5,7 +5,6 @@ import Projects from "./pages/Projects"
 import Experience from "./pages/Experience"
 import Contact from "./pages/Contact"
 import Home from "./pages/Home"
-import Footer from "./components/Footer"
 
 const App = () => {
   return (
@@ -19,7 +18,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
       </Routes>
 
-      <Footer />
+      
     
     </>
     

@@ -4,14 +4,14 @@ import { cn } from "@/lib/utils"
 interface CardProps {
   className?: string
   title?: string
-  description?: string
+  description?: React.ReactNode // changed from string to React.ReactNode
   children?: React.ReactNode
 }
 
 export default function Card({
   className,
-  title = "",
-  description = "",
+  title,
+  description,
   children,
 }: CardProps) {
   const [isHovered, setIsHovered] = useState(false)
@@ -27,7 +27,7 @@ export default function Card({
       onMouseLeave={() => setIsHovered(false)}
     >
       {title && <h3 className="mb-2 text-xl font-semibold text-white">{title}</h3>}
-      {description && <p className="mb-4 text-white/80">{description}</p>}
+      {description && <div className="mb-4 text-white/80">{description}</div>}
       {children}
     </div>
   )

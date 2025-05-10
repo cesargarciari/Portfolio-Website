@@ -52,5 +52,13 @@
 }
 
 
+@utility text-gradient-bkb {
+  @apply bg-linear-to-r from-[#d7a452] to-[#e8860f] bg-clip-text text-transparent;
+}
+
+@utility text-gradient-se {
+  @apply bg-linear-to-r from-[#4a8ea3] to-[#22a7ee] bg-clip-text text-transparent;
+}
+
 
 
