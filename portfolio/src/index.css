@@ -5,13 +5,7 @@
 
 @theme {
   --color-primary: #111111;
-
-  --color-light-100: #cecefb;
-  --color-light-200: #a8b5db;
-
-  --color-gray-100: #9ca4ab;
-
-  --color-dark-100: #0f0d23;
+  --color-secondary: #ffffff;
 
   --font-primary: "Raleway", sans-serif;
 
@@ -21,20 +15,15 @@
 
 @layer base {
   body {
-    font-optical-sizing: auto;
-    background: #111111;
-  }
-
-  h1 {
-    @apply mx-auto max-w-4xl text-center text-5xl font-bold leading-tight tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
-  }
-
-  h2 {
-    @apply text-2xl font-bold text-white sm:text-3xl;
+    @apply bg-primary font-primary;
   }
 
   main {
     @apply min-h-screen relative bg-primary;
+  }
+
+  h2 {
+    @apply text-white text-4xl
   }
 
 
@@ -57,7 +46,7 @@
 }
 
 @utility text-gradient-se {
-  @apply bg-linear-to-r from-[#4a8ea3] to-[#22a7ee] bg-clip-text text-transparent;
+  @apply bg-linear-to-r from-[#a6eaff] to-[#00a6ff] bg-clip-text text-transparent;
 }
 
 

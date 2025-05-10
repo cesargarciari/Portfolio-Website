@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils"
 
 interface CardProps {
   className?: string
-  title?: string
-  description?: React.ReactNode // changed from string to React.ReactNode
+  title?: React.ReactNode
+  description?: React.ReactNode 
   children?: React.ReactNode
 }
 
