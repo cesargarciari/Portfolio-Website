@@ -1,7 +1,8 @@
 import Card from "@/components/Card"
 import { TechIcons } from "@/components/TechIcons"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin } from "lucide-react"
+import { Github, Instagram, Linkedin} from "lucide-react"
+import { Link } from "react-router-dom"
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
         <p className="text-gray-400 font-light">Calgary, Alberta/El Salvador</p>
         </div>}     
     description= {<><p className="text-white">I am a 20 year-old software engineering student with a strong desire to 
-                learn and grow in the field. I have experience in various programming languages and frameworks, and I am always eager to take on new challenges.</p>
+                learn and grow in the field.</p>
                 
                 <div className="flex flex-row gap-2 mt-4">
 
@@ -24,6 +25,10 @@ const Home = () => {
                     <a href="https://www.linkedin.com/in/c%C3%A9sar-garc%C3%ADa-4b90b32aa/" target="_blank" rel="noopener noreferrer">
                     <Button variant="secondary" className="hover:cursor-pointer"><Linkedin color="#000000" /></Button>
                     </a>   
+                    
+                    <a href="https://www.instagram.com/cesargarciaar/" target="_blank" rel="noopener noreferrer">
+                    <Button variant="secondary" className="hover:cursor-pointer"><Instagram color="#000000" /></Button>
+                    </a>   
                 </div>
                 </>}>
     </Card>   
@@ -33,9 +38,17 @@ const Home = () => {
         <TechIcons />
     </div>
 
-    <a>
-    <Button variant="secondary" className="bg-gradient-to-r from-[#00C9FF] to-[#92FE9D] text-white">Download CV</Button>
-    </a>     
+    <a href="/resume.pdf" download>
+    <Button variant="secondary" className="bg-gradient-to-r from-[#00C9FF] to-[#00ffc3] text-shadow-amber-50 mt-2.5">Download CV</Button>
+    </a>   
+
+    <div>
+        <h2 className="font-bold mb-2 mt-16">About</h2>
+        <p className="text-gray-400 font-light">I have experience in various programming languages and frameworks, and I am always eager to take on new challenges.</p>
+        <Button variant="secondary" className="mt-3">
+        <Link to="/about">Learn more</Link>
+        </Button> 
+    </div>  
 
     </div>
   )
