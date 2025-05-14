@@ -38,8 +38,8 @@ const Home = () => {
         <TechIcons />
     </div>
 
-    <a href="/resume.pdf" download>
-    <Button variant="secondary" className="bg-gradient-to-r from-[#00C9FF] to-[#00ffc3] text-shadow-amber-50 mt-2.5">Download CV</Button>
+    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+    <Button variant="secondary" className="bg-gradient-to-r from-[#00C9FF] to-[#00ffc3] text-shadow-amber-50 mt-2.5 hover:cursor-pointer">Download CV</Button>
     </a>   
 
     <div>
