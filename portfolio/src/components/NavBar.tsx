@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const NavBar = () => {
   return (
-    <header className=''>
+    <header className='Navbar'>
     
     <nav className='navbar'>
 

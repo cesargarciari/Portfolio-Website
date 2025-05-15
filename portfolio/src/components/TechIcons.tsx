@@ -1,4 +1,4 @@
-// src/components/TechIcons.tsx
+
 const techLinks: Record<string,string> = {
   css:       "https://cs.wikipedia.org/wiki/Kask%C3%A1dov%C3%A9_styly",
   docker:    "https://www.docker.com/",

@@ -1,5 +1,6 @@
 import Card from "@/components/Card"
 
+
   
   const About = () => {
     return (
@@ -20,8 +21,7 @@ import Card from "@/components/Card"
           } className="max-w-2xl">
         </Card>
           <div>
-          <h2 className="justify-items-start"></h2>
-
+          <h2 className="justify-items-start"> </h2>
           </div>
 
 
