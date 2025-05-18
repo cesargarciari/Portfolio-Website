@@ -23,7 +23,7 @@
   }
 
   h2 {
-    @apply text-white text-3xl sm:text-4xl md:text-5xl font-bold
+    @apply text-white text-6xl sm:text-4xl md:text-5xl font-bold
   }
 
   h4{
@@ -46,11 +46,23 @@
     @apply hover:cursor-pointer;
   }
 
+  .parallax-section{
+  @apply relative h-screen overflow-hidden
+}
+
+  .parallax-image {
+    @apply absolute inset-0 w-full h-full object-cover will-change-transform
+  }
+
 }
 
 
 @utility text-gradient-bkb {
-  @apply bg-linear-to-r from-[#d7a452] to-[#e8860f] bg-clip-text text-transparent;
+  @apply bg-linear-to-r from-[#d7a452] to-[#e8860f] bg-clip-text text-transparent font-bold;
+}
+
+@utility text-gradient-es {
+  @apply bg-linear-to-r from-[#1b52de] to-[#7da3e9] bg-clip-text text-transparent font-bold;
 }
 
 @utility text-gradient-se {
