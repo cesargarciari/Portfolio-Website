@@ -1,4 +1,5 @@
 import Card from "@/components/Card"
+import Footer from "@/components/Footer"
 import { TechIcons } from "@/components/TechIcons"
 import { Button } from "@/components/ui/button"
 import { Github, Instagram, Linkedin} from "lucide-react"
@@ -39,11 +40,10 @@ const Home = () => {
     </Card>   
 
     <section className="w-full">
-        <h2 className="font-bold text-lg sm:text-xl mb-4">What I work with</h2>
+        <h2 className="mb-4">What I work with</h2>
         <TechIcons />
       </section>
 
-      {/* Download CV */}
       <section className="w-full">
         <a
           href="/resume.pdf"
@@ -59,17 +59,25 @@ const Home = () => {
         </a>
       </section>
 
-      {/* About Section */}
       <section className="w-full">
-        <h2 className="font-bold text-lg sm:text-xl mb-2">About</h2>
+        <h2 className="mb-2">About</h2>
         <p className="text-gray-400 text-sm sm:text-base font-light">
           I have experience in various programming languages and frameworks, and I am always eager to take on new challenges.
         </p>
         <Button variant="secondary" className="mt-3 w-full sm:w-auto">
-          <Link to="/about">Learn more</Link>
+          <Link to="/about">Learn more…</Link>
         </Button>
       </section>
 
+      <section>
+      <blockquote className="text-lg italic text-gray-300 max-w-2xl mx-auto border-l-4 border-cyan-400 pl-4">
+    “Strive For Greatness”
+  </blockquote>
+      </section>
+
+        <section>
+            <Footer />
+        </section>
     </div>
   )
 }
