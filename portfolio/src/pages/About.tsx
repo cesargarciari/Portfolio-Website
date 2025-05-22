@@ -21,11 +21,11 @@ import { useEffect, useState } from "react"
             <main className="min-h-screen">
 <section className="relative h-screen overflow-hidden">
   <div
-    className="absolute inset-0 w-full h-full"
+    className="absolute w-full h-full"
     style={{ transform: `translateY(${scrollY * 0.5}px)` }}
   >
     <div className="flex flex-col items-center justify-center h-full relative z-10">
-      <img src="/public/Me.jpg" alt="..." className="rounded-full w-2xs mb-6 shadow-lg" />
+      <img src="/Me.jpg" alt="..." className="rounded-full w-2xs mb-6 shadow-lg" />
       <h1 className="text-5xl font-bold text-white text-center px-4">Hello, I'm César</h1>
     </div>
   </div>
@@ -58,10 +58,10 @@ import { useEffect, useState } from "react"
 
               <section className="parallax-section">
                 <div
-                  className="absolute inset-0 w-full h-full"
+                  className="absolute w-full h-full"
                   style={{ transform: getTranslateY(0.3, 1.6) }}
                 >
-                  <img src="/public/UofC.jpg" alt="University" className=" parallax-image" />
+                  <img src="/UofC.jpg" alt="University" className=" parallax-image" />
                 </div>
                 <div className="absolute inset-0 bg-b/40 flex items-center justify-center">
                   <h2 className="text-4xl md:text-6xl font-bold text-white text-center px-4">Education</h2>

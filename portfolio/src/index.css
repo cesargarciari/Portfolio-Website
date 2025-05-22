@@ -22,6 +22,10 @@
     @apply min-h-screen relative bg-primary;
   }
 
+  h1 {
+    @apply text-white text-7xl sm:text-5xl md:text-6xl font-bold
+  }
+
   h2 {
     @apply text-white text-6xl sm:text-4xl md:text-5xl font-bold
   }
