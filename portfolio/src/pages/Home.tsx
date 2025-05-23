@@ -60,16 +60,6 @@ const Home = () => {
         </a>
       </section>
 
-      <section className="w-full">
-        <h2 className="mb-2">About</h2>
-        <p className="text-gray-400 text-sm sm:text-base font-light">
-          I have experience in various programming languages and frameworks, and I am always eager to take on new challenges.
-        </p>
-        <Button variant="secondary" className="mt-3 w-full sm:w-auto">
-          <Link to="/about">Learn more…</Link>
-        </Button>
-      </section>
-
       <section>
       <blockquote className="text-lg italic text-gray-300 max-w-2xl mx-auto border-l-4 border-cyan-400 pl-4">
     “Strive For Greatness”
