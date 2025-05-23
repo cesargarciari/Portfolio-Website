@@ -10,6 +10,48 @@ const Projects = () => {
 
 
     <div className="flex flex-col gap-10 mt-4">
+        <Card 
+    title={  
+    
+        <div> 
+        <h2> Website </h2>
+        <div className="flex flex-row justify-between">
+        <p className="text-gray-400 text-sm sm:text-base font-light">
+        Vite | React | Tailwind CSS | TypeScript
+        </p>
+        <p  className="text-gray-400 text-sm sm:text-base font-light mr-15">
+            April-May 2025
+        </p>
+        </div>
+        </div>}     
+    description= {
+    <>
+    <p className="text-white mr-10">
+    A responsive, minimalistic web portfolio designed to showcase my software development projects, 
+    skills, and experience. The site focuses on performance, accessibility, and clean design. It includes 
+    minimalist animations, organized project cards, and a dynamic layout optimized for all devices.
+    <br></br>
+    <br></br>
+    <span className="font-bold">Features</span>
+    <br></br>
+    • Developed from scratch using modern frontend tools
+    <br></br>
+    • Fully responsive and optimized for performance
+    <br></br>
+    • Built with reusable, scalable components in TypeScript
+    <br></br>
+    • Emphasizes clean UI/UX and minimalistic design principles
+
+    </p>
+    <div className="mt-4">
+    <a href="https://github.com/cesargarciari/PortfolioWebsite" target="_blank" rel="noopener noreferrer">
+        <Button variant="secondary" className="home-button"><FaGithub color="#000000" /></Button>
+        </a>
+    </div>
+
+                </>}>
+    </Card> 
+
          <Card 
     title={  
     
@@ -85,47 +127,7 @@ const Projects = () => {
                 </>}>
     </Card> 
 
-    <Card 
-    title={  
     
-        <div> 
-        <h2> Website </h2>
-        <div className="flex flex-row justify-between">
-        <p className="text-gray-400 text-sm sm:text-base font-light">
-        Vite | React | Tailwind CSS | TypeScript
-        </p>
-        <p  className="text-gray-400 text-sm sm:text-base font-light mr-15">
-            April-May 2025
-        </p>
-        </div>
-        </div>}     
-    description= {
-    <>
-    <p className="text-white mr-10">
-    A responsive, minimalistic web portfolio designed to showcase my software development projects, 
-    skills, and experience. The site focuses on performance, accessibility, and clean design. It includes 
-    minimalist animations, organized project cards, and a dynamic layout optimized for all devices.
-    <br></br>
-    <br></br>
-    <span className="font-bold">Features</span>
-    <br></br>
-    • Developed from scratch using modern frontend tools
-    <br></br>
-    • Fully responsive and optimized for performance
-    <br></br>
-    • Built with reusable, scalable components in TypeScript
-    <br></br>
-    • Emphasizes clean UI/UX and minimalistic design principles
-
-    </p>
-    <div className="mt-4">
-    <a href="https://github.com/cesargarciari/PortfolioWebsite" target="_blank" rel="noopener noreferrer">
-        <Button variant="secondary" className="home-button"><FaGithub color="#000000" /></Button>
-        </a>
-    </div>
-
-                </>}>
-    </Card> 
     </div>
     </div>
   )
