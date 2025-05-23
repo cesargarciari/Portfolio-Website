@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 
 import { FaGithub, FaInstagram } from "react-icons/fa";
 import { IoLogoLinkedin } from "react-icons/io";
-import { Link } from "react-router-dom"
 
 const Home = () => {
   return (
