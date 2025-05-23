@@ -1,6 +1,6 @@
 import Card from "@/components/Card"
 import { Button } from "@/components/ui/button"
-import { Github } from "lucide-react"
+import { FaGithub } from "react-icons/fa"
 
 const Projects = () => {
   return (
@@ -37,7 +37,7 @@ const Projects = () => {
     <div className="mt-4">
 
     <a href="https://github.com/cesargarciari/NBA-MVP-Predictor" target="_blank" rel="noopener noreferrer">
-        <Button variant="secondary" className="home-button"><Github color="#000000" /></Button>
+        <Button variant="secondary" className="home-button"><FaGithub color="#000000" /></Button>
         </a>
     </div>
 
@@ -72,7 +72,7 @@ const Projects = () => {
     </p>
     <div className="mt-4">
     <a href="https://github.com/cesargarciari/Movie-Management-System" target="_blank" rel="noopener noreferrer">
-        <Button variant="secondary" className="home-button"><Github color="#000000" /></Button>
+        <Button variant="secondary" className="home-button"><FaGithub color="#000000" /></Button>
         </a>
     </div>
 
@@ -109,7 +109,7 @@ const Projects = () => {
     </p>
     <div className="mt-4">
     <a href="https://github.com/cesargarciari/PortfolioWebsite" target="_blank" rel="noopener noreferrer">
-        <Button variant="secondary" className="home-button"><Github color="#000000" /></Button>
+        <Button variant="secondary" className="home-button"><FaGithub color="#000000" /></Button>
         </a>
     </div>
 

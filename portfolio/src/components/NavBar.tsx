@@ -1,5 +1,6 @@
-import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { IoClose } from 'react-icons/io5';
+import { LuMenu } from 'react-icons/lu';
 import { Link } from 'react-router-dom'
 
 const NavBar = () => {
@@ -23,7 +24,7 @@ const NavBar = () => {
 
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
-            {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
+            {isOpen ? <IoClose className="text-white" /> : <LuMenu className="text-white" />}
           </button>
         </div>
       </nav>

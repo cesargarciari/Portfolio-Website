@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
-import { Mail } from "lucide-react"
 import { FaDiscord, FaInstagram, FaLinkedin } from "react-icons/fa"
+import { GrMailOption } from "react-icons/gr"
 
 
 const Contact = () => {
@@ -57,7 +57,7 @@ const Contact = () => {
               className="flex flex-col items-center space-y-3 p-4 rounded-lg bg-slate-100 hover:bg-slate-300 transition-all duration-300 group"
             >
               <div className="p-3 bg-green-100 rounded-full group-hover:scale-110 transition-transform duration-300">
-                <Mail className="w-6 h-6 text-green-600" />
+                <GrMailOption className="w-6 h-6 text-green-600" />
               </div>
               <span className="text-sm font-medium text-slate-700">cesarolangogr@gmail.com</span>
             </a>
