@@ -58,6 +58,10 @@
     @apply absolute inset-0 w-full h-full object-cover will-change-transform
   }
 
+  .about-text{
+    @apply text-lg md:text-xl text-gray-700
+  }
+
 }
 
 

@@ -35,7 +35,7 @@ import { useEffect, useState } from "react"
 
 
     <ContentSection title="About Me">
-    <p className="text-lg md:text-xl text-gray-700 mb-6">
+    <p className="about-text mb-6">
         I’m a software engineering student with a passion for building clean, functional, 
         and meaningful digital experiences. I enjoy creating full-stack applications, 
         from intuitive frontends to designing solid backend systems. I have a strong 
@@ -48,7 +48,7 @@ import { useEffect, useState } from "react"
         both in code and aesthetics.
         </p>
 
-        <p className="text-lg md:text-xl text-gray-700">
+        <p className="about-text">
         I am currently pursuing my studies at the University of Calgary where I just finished my third year.
         </p>
     </ContentSection>
@@ -66,9 +66,9 @@ import { useEffect, useState } from "react"
               </section>
         
     <ContentSection title="🎓 University of Calgary">
-    <p className="text-lg md:text-xl text-gray-700"> Bachelor of Science in Software Engineering </p>
-    <p className="text-lg md:text-xl text-gray-700 mb-6"> Calgary, Alberta — Expected Graduation: 2027 (with Co-op)</p>
-    <p className="text-lg md:text-xl text-gray-700">Actively seeking a Software Engineering Co-op for Fall 2025</p>
+    <p className="about-text"> Bachelor of Science in Software Engineering </p>
+    <p className="about-text mb-6"> Calgary, Alberta — Expected Graduation: 2027 (with Co-op)</p>
+    <p className="about-text">Actively seeking a Software Engineering Co-op for Fall 2025</p>
     </ContentSection>
 
         
@@ -86,15 +86,15 @@ import { useEffect, useState } from "react"
         
 
         <ContentSection title="More about César">
-        <p className="text-lg md:text-xl text-gray-700 mb-6">I’m originally from 
+        <p className="about-text mb-6">I’m originally from 
         <span className="text-gradient-es">El Salvador </span>
         and currently based in Calgary, Alberta.</p>
                   
-        <p className="text-lg md:text-xl text-gray-700 mb-6">I initially considered a path in Chemical Engineering, but during my first year of 
+        <p className="about-text mb-6">I initially considered a path in Chemical Engineering, but during my first year of 
           university, I discovered a true passion for software development. The creativity, logic, and problem-solving involved really resonated 
           with me and I haven’t looked back since.</p>
         
-        <p className="text-lg md:text-xl text-gray-700">Outside of the tech field, I enjoy being outdoors whether it’s hiking or travelling to new 
+        <p className="about-text">Outside of the tech field, I enjoy being outdoors whether it’s hiking or travelling to new 
           places, or more recently, getting into running. I’m also a big sports fan; <span className="text-gradient-bkb">basketball</span> is my 
           favorite, but I follow and enjoy football just as much.</p>
           
