@@ -1,7 +1,9 @@
 import Card from "@/components/Card"
 import { TechIcons } from "@/components/TechIcons"
 import { Button } from "@/components/ui/button"
-import { Github, Instagram, Linkedin} from "lucide-react"
+
+import { FaGithub, FaInstagram } from "react-icons/fa";
+import { IoLogoLinkedin } from "react-icons/io";
 import { Link } from "react-router-dom"
 
 const Home = () => {
@@ -24,15 +26,15 @@ const Home = () => {
     
     <div className="flex flex-row gap-2 mt-4">
         <a href="https://github.com/cesargarciari" target="_blank" rel="noopener noreferrer">
-        <Button variant="secondary" className="home-button"><Github color="#000000" /></Button>
+        <Button variant="secondary" className="home-button"><FaGithub className="text-black" /></Button>
         </a>
         
         <a href="https://www.linkedin.com/in/c%C3%A9sar-garc%C3%ADa-4b90b32aa/" target="_blank" rel="noopener noreferrer">
-        <Button variant="secondary" className="home-button"><Linkedin color="#000000" /></Button>
+        <Button variant="secondary" className="home-button"><IoLogoLinkedin className="text-black size={32}"/></Button>
         </a>   
         
         <a href="https://www.instagram.com/cesargarciaar/" target="_blank" rel="noopener noreferrer">
-        <Button variant="secondary" className="home-button"><Instagram color="#000000" /></Button>
+        <Button variant="secondary" className="home-button"><FaInstagram className="text-black"/></Button>
         </a>   
     </div>
                 </>}>
