@@ -1,5 +1,4 @@
 import Card from "@/components/Card"
-import Footer from "@/components/Footer"
 import { TechIcons } from "@/components/TechIcons"
 import { Button } from "@/components/ui/button"
 import { Github, Instagram, Linkedin} from "lucide-react"
@@ -74,10 +73,6 @@ const Home = () => {
     “Strive For Greatness”
   </blockquote>
       </section>
-
-        <section>
-            <Footer />
-        </section>
     </div>
   )
 }
