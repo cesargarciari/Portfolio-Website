@@ -15,13 +15,16 @@ const Projects = () => {
     
         <div> 
         <h2> NBA MVP Ranking Model </h2>
+        <div className="flex flex-row justify-between">
         <p className="text-gray-400 text-sm sm:text-base font-light">
-        Python (Modules: Pandas, Scikit-Learn)
+        Python (Modules: Pandas, Scikit-Learn)  
         </p>
+        <p className=" text-gray-400 text-sm sm:text-base font-light mr-15">March-April 2025</p>
+        </div>
         </div>}     
     description= {
     <>
-    <p className="text-white">
+    <p className="text-white mr-10">
     This project is a machine learning-based predictor that determines the Most Valuable Player (MVP) for the NBA based on historical player statistics and performance metrics.
     
     <br></br>
@@ -49,13 +52,16 @@ const Projects = () => {
     
         <div> 
         <h2> Movie Theatre Reservation Application: </h2>
+        <div className="flex flex-row justify-between">
         <p className="text-gray-400 text-sm sm:text-base font-light">
         Java (Libraries: mysql-connector) | MySQL
         </p>
+        <p className=" text-gray-400 text-sm sm:text-base font-light mr-15">October-Novemer 2024</p>
+        </div>
         </div>}     
     description= {
     <>
-    <p className="text-white">
+    <p className="text-white mr-10">
     A Java-based desktop application with a graphical user interface for managing a personal movie database. 
     Designed to reinforce Object-Oriented Programming (OOP) principles.
     <br></br>
@@ -84,13 +90,18 @@ const Projects = () => {
     
         <div> 
         <h2> Website </h2>
+        <div className="flex flex-row justify-between">
         <p className="text-gray-400 text-sm sm:text-base font-light">
         Vite | React | Tailwind CSS | TypeScript
         </p>
+        <p  className="text-gray-400 text-sm sm:text-base font-light mr-15">
+            April-May 2025
+        </p>
+        </div>
         </div>}     
     description= {
     <>
-    <p className="text-white">
+    <p className="text-white mr-10">
     A responsive, minimalistic web portfolio designed to showcase my software development projects, 
     skills, and experience. The site focuses on performance, accessibility, and clean design. It includes 
     minimalist animations, organized project cards, and a dynamic layout optimized for all devices.
