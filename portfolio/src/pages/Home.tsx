@@ -28,7 +28,7 @@ const Home = () => {
         <Button variant="secondary" className="home-button"><FaGithub className="text-black" /></Button>
         </a>
         
-        <a href="https://www.linkedin.com/in/c%C3%A9sar-garc%C3%ADa-4b90b32aa/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/cesargarciarivas/" target="_blank" rel="noopener noreferrer">
         <Button variant="secondary" className="home-button"><IoLogoLinkedin className="text-black size={32}"/></Button>
         </a>   
         
