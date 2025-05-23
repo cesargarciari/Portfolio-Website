@@ -56,7 +56,19 @@ const Projects = () => {
     description= {
     <>
     <p className="text-white">
-        Description
+    A Java-based desktop application with a graphical user interface for managing a personal movie database. 
+    Designed to reinforce Object-Oriented Programming (OOP) principles.
+    <br></br>
+    <br></br>
+    <span className="font-bold">Features</span>
+    <br></br>
+    • GUI developed in Java 
+    <br></br>
+    • Add, update, search, and delete reservations
+    <br></br>
+    • Follows OOP principles: encapsulation, inheritance, polymorphism
+    <br></br>
+    • Connects to a SQL database for persistent storage
     </p>
     <div className="mt-4">
     <a href="https://github.com/cesargarciari/Movie-Management-System" target="_blank" rel="noopener noreferrer">
@@ -79,7 +91,21 @@ const Projects = () => {
     description= {
     <>
     <p className="text-white">
-        Description
+    A responsive, minimalistic web portfolio designed to showcase my software development projects, 
+    skills, and experience. The site focuses on performance, accessibility, and clean design. It includes 
+    minimalist animations, organized project cards, and a dynamic layout optimized for all devices.
+    <br></br>
+    <br></br>
+    <span className="font-bold">Features</span>
+    <br></br>
+    • Developed from scratch using modern frontend tools
+    <br></br>
+    • Fully responsive and optimized for performance
+    <br></br>
+    • Built with reusable, scalable components in TypeScript
+    <br></br>
+    • Emphasizes clean UI/UX and minimalistic design principles
+
     </p>
     <div className="mt-4">
     <a href="https://github.com/cesargarciari/PortfolioWebsite" target="_blank" rel="noopener noreferrer">
