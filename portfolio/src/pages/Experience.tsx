@@ -1,6 +1,10 @@
+import { ScrollTimeline } from "@/components/ExperienceCards"
+
 const Experience = () => {
   return (
-    <div>Experience</div>
+    <div>
+      <ScrollTimeline />
+    </div>
   )
 }
 
