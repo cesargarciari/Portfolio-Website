@@ -53,17 +53,13 @@ import { useEffect, useState } from "react"
         </p>
     </ContentSection>
 
-              <section className="parallax-section">
-                <div
-                  className="absolute w-full h-full"
-                  style={{ transform: getTranslateY(0.3, 1.6) }}
-                >
-                  <img src="/UofC.jpg" alt="University" className=" parallax-image" />
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h2 className="text-4xl md:text-6xl font-bold text-white text-center px-4">Education</h2>
-                </div>
-              </section>
+      <section className="parallax-section">
+  <img src="/UofC.jpg" alt="University" className="parallax-image object-cover w-full h-full" />
+  <div className="absolute inset-0 flex items-center justify-center">
+    <h2 className="text-4xl md:text-6xl font-bold text-white text-center px-4">Education</h2>
+  </div>
+</section>
+
         
     <ContentSection title="🎓 University of Calgary">
     <p className="about-text"> Bachelor of Science in Software Engineering </p>
@@ -72,22 +68,18 @@ import { useEffect, useState } from "react"
     </ContentSection>
 
         
-              <section className="relative h-screen overflow-hidden">
-                <div
-                  className="absolute inset-0 w-full h-full"
-                  style={{ transform: getTranslateY(0.3, 3) }}
-                >
-                  <img src="/Beach.jpg" alt="Abstract art" className="object-cover w-full h-full" />
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h2 className="text-4xl md:text-6xl font-bold text-white text-center px-4">Story</h2>
-                </div>
-              </section>
+      <section className="parallax-section">
+  <img src="/Beach.jpg" alt="Abstract art" className="parallax-image object-cover w-full h-full" />
+  <div className="absolute inset-0 flex items-center justify-center">
+    <h2 className="text-4xl md:text-6xl font-bold text-white text-center px-4">Story</h2>
+  </div>
+</section>
+
         
 
         <ContentSection title="More about César">
         <p className="about-text mb-6">I’m originally from 
-        <span className="text-gradient-es">El Salvador </span>
+        <span className="text-gradient-es"> El Salvador </span>
         and currently based in Calgary, Alberta.</p>
                   
         <p className="about-text mb-6">I initially considered a path in Chemical Engineering, but during my first year of 

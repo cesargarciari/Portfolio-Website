@@ -59,7 +59,7 @@
 }
 
   .parallax-image {
-    @apply absolute inset-0 w-full h-full object-cover will-change-transform
+    @apply absolute -inset-0 w-full h-full 
   }
 
   .about-text{
