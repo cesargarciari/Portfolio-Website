@@ -34,23 +34,27 @@ const Contact = () => {
               <span className="text-sm font-medium text-slate-700">crujer</span>
             </div>
 
-            <div              
+            <a          
+              href="https://www.linkedin.com/in/cesargarciarivas/"
+              target="_blank" rel="noopener noreferrer"    
               className="flex flex-col items-center space-y-3 p-4 rounded-lg bg-slate-100 hover:bg-slate-300 transition-all duration-300 group"
             >
               <div className="p-3 bg-blue-100 rounded-full group-hover:scale-110 transition-transform duration-300">
                 <FaLinkedin className="w-6 h-6 text-blue-600" />
               </div>
               <span className="text-sm font-medium text-slate-700">cesargarciarivas</span>
-            </div>
+            </a>
 
-            <div
+            <a
+              href="https://www.instagram.com/cesargarciaar/"
+              target="_blank" rel="noopener noreferrer"
              className="flex flex-col items-center space-y-3 p-4 rounded-lg bg-slate-100 hover:bg-slate-300 transition-all duration-300 group"
             >
               <div className="p-3 bg-pink-100 rounded-full group-hover:scale-110 transition-transform duration-300">
                 <FaInstagram className="w-6 h-6 text-pink-600" />
               </div>
               <span className="text-sm font-medium text-slate-700">cesargarciaar</span>
-            </div>
+            </a>
 
             <a
               href="mailto:cesarolangogr@gmail.com"
