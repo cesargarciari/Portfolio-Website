@@ -13,10 +13,7 @@ import { useEffect, useState } from "react"
             return () => window.removeEventListener("scroll", handleScroll)
           }, [])
         
-          const getTranslateY = (multiplier: number, offset = 0) => {
-            const height = typeof window !== "undefined" ? window.innerHeight : 0
-            return `translateY(${(scrollY - height * offset) * multiplier}px)`
-          }
+
     return (
     <main className=" bg-primary min-h-screen">
 
