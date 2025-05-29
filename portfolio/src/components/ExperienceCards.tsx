@@ -26,8 +26,8 @@ const experiences: ExperienceItem[] = [
     location: "El Salvador",
     period: "May 2025 - Present",
     description:
-      "Developed a payment confirmation interface integrated into internal systems. Created and managing SQL Server tables using Microsoft SQL Server Management Studio (SSMS).Collaborated with senior engineers during onboarding and early phases of feature planning.",
-    skills: ["C#", "SQL", "HTML"],
+      "In this ASP.NET MVC project, I developed an admin module for submitting and viewing payment confirmations. I used Razor views to dynamically render forms and tables based on data passed from the AdminController, and styled the interface using Bootstrap 5 to ensure a responsive and user-friendly UI. I implemented tabbed navigation within a single Razor page and integrated SQL Server to retrieve and display supervisor and payment data.",
+    skills: ["C#", "SQL", "HTML", "Bootstrap", "Razor views"],
     type: "Internship",
   },
   {
