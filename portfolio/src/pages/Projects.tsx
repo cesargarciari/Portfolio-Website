@@ -1,6 +1,6 @@
 import Card from "@/components/Card"
 import { Button } from "@/components/ui/button"
-import { FaGithub } from "react-icons/fa"
+import { FaGithub, FaLink } from "react-icons/fa"
 
 const Projects = () => {
   return (
@@ -10,6 +10,8 @@ const Projects = () => {
 
 
     <div className="flex flex-col gap-10 mt-4">
+
+        {/* First */}
         <Card 
     title={  
     
@@ -52,6 +54,7 @@ const Projects = () => {
                 </>}>
     </Card> 
 
+    {/* Second */}
          <Card 
     title={  
     
@@ -89,11 +92,49 @@ const Projects = () => {
                 </>}>
     </Card> 
     
+    {/* Third */}
     <Card 
     title={  
     
         <div> 
-        <h2> Movie Theatre Reservation Application: </h2>
+        <h2>RateMyDino - Professor Summary Web App</h2>
+        <div className="flex flex-row justify-between">
+        <p className="text-gray-400 text-sm sm:text-base font-light">
+        Python | Next.js | OpenAI API
+        </p>
+        <p className=" text-gray-400 text-sm sm:text-base font-light mr-15">January-March 2025</p>
+        </div>
+        </div>}     
+    description= {
+    <>
+    <p className="text-white mr-10">
+A full-stack web application built to help University of Calgary students quickly understand professor reviews 
+        using AI-generated summaries from RateMyProfessor data.
+    <br></br>
+    <br></br>
+    <span className="font-bold">Features</span>
+    <br></br>
+    • Backend in Python with prompt engineering for OpenAI API integration
+    <br></br>
+    • SQL database with a layered MVC architecture
+    <br></br>
+   • Frontend in React (Next.js) with dynamic professor pages
+    </p>
+    <div className="mt-4">
+    <a href="https://ratemydino.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <Button variant="secondary" className="home-button"><FaLink  color="#000000" /></Button>
+        </a>
+    </div>
+
+                </>}>
+    </Card> 
+
+    {/* Fourth */}
+    <Card 
+    title={  
+    
+        <div> 
+        <h2> Movie Theatre Reservation Application</h2>
         <div className="flex flex-row justify-between">
         <p className="text-gray-400 text-sm sm:text-base font-light">
         Java (Libraries: mysql-connector) | MySQL
@@ -126,6 +167,9 @@ const Projects = () => {
 
                 </>}>
     </Card> 
+
+
+
 
     
     </div>
