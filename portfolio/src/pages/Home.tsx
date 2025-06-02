@@ -46,7 +46,7 @@ const Home = () => {
 
       <section className="w-full">
         <a
-          href="/resume-v2.pdf"
+          href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
