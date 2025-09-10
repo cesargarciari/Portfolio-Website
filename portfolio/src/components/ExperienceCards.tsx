@@ -24,7 +24,7 @@ const experiences: ExperienceItem[] = [
     title: "Software Engineer Backend Intern",
     company: "Grupo Roble",
     location: "El Salvador",
-    period: "May 2025 - Present",
+    period: "May 2025 - August 2025",
     description:
       "In this ASP.NET MVC project, I developed an admin module for submitting and viewing payment confirmations. I used Razor views to dynamically render forms and tables based on data passed from the AdminController, and styled the interface using Bootstrap 5 to ensure a responsive and user-friendly UI. I implemented tabbed navigation within a single Razor page and integrated SQL Server to retrieve and display supervisor and payment data.",
     skills: ["C#", "SQL", "HTML", "Bootstrap", "Razor views"],
