@@ -60,9 +60,6 @@ const Home = () => {
       </section>
 
       <section>
-      <blockquote className="text-lg italic text-gray-300 max-w-2xl mx-auto border-l-4 border-cyan-400 pl-4">
-    “Strive For Greatness”
-  </blockquote>
       </section>
     </div>
   )
