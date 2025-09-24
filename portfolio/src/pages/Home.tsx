@@ -40,7 +40,7 @@ const Home = () => {
     </Card>   
 
     <section className="w-full">
-        <h2 className="mb-4">What I work with</h2>
+        <h3 className="mb-4">What I work with</h3>
         <TechIcons />
       </section>
 
@@ -60,6 +60,26 @@ const Home = () => {
       </section>
 
       <section>
+        <h3 className="mb-4">About me</h3>
+        <p className="text-white">I’m a software engineering student with a passion for building clean, functional, 
+        and meaningful digital experiences. I enjoy creating full-stack applications, 
+        from intuitive frontends to designing solid backend systems. I have a strong 
+        interest in web development, particularly using Next.js, Vite, and React.
+        <br />
+        <br />
+        Lately, I’ve been exploring the world of machine learning, curious about how data-driven 
+        systems can enhance the way we interact with technology. I’m drawn to minimalist design, 
+        both in code and aesthetics.
+        <br />
+        <br />
+        I am currently pursuing my studies at the University of Calgary where I just started my fourth year.
+        <br />
+        <br />
+        I’m originally from <span className="text-gradient-es"> El Salvador </span> and currently based in Calgary, Alberta.
+        Outside of the tech field, I enjoy being outdoors whether it’s hiking or travelling to new 
+        places, or more recently, getting into the sport of Padel. I’m also a big sports fan; <span className="text-gradient-bkb">basketball </span> 
+        is my favorite, but I follow and enjoy football just as much.
+        </p>
       </section>
     </div>
   )

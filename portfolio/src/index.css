@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 @import "tailwindcss";
 
@@ -7,7 +6,7 @@
   --color-primary: #111111;
   --color-secondary: #ffffff;
 
-  --font-primary: "Raleway", sans-serif;
+  --font-primary: 'Poppins', sans-serif;
 
   --breakpoint-xs: 480px;
 
@@ -28,6 +27,10 @@
 
   h2 {
     @apply text-white text-6xl sm:text-4xl md:text-5xl font-bold
+  }
+
+  h3{
+    @apply text-white text-4xl sm:text-2xl md:text-3xl font-semibold
   }
 
   h4{
@@ -52,18 +55,6 @@
 
   .home-button{
     @apply hover:cursor-pointer;
-  }
-
-  .parallax-section{
-  @apply relative h-screen overflow-hidden
-}
-
-  .parallax-image {
-    @apply absolute -inset-0 w-full h-full 
-  }
-
-  .about-text{
-    @apply text-lg md:text-xl text-gray-700
   }
 
 }
