@@ -1,5 +1,5 @@
 import { NavLink, Link} from "react-router-dom";
-import { Home, Github, Linkedin, FileText, Mail } from "lucide-react";
+import { Home, Github, FileText, Mail } from "lucide-react";
 
 const iconBase =
   "h-6 w-6 text-white transition group-hover:opacity-100 group-focus:opacity-100";
@@ -7,7 +7,7 @@ const itemBase =
   "group inline-flex items-center justify-center h-12 w-12 rounded-xl hover:bg-white/5 focus:bg-white/5 outline-none";
 
   
-  const handleHomeClick = (e) => {
+  const handleHomeClick = (e: { preventDefault: () => void; }) => {
   if (location.pathname === "/") {
     e.preventDefault(); // stop NavLink’s default navigation
     window.scrollTo({ top: 0, behavior: "smooth" });
