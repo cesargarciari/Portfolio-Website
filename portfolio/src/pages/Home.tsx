@@ -19,7 +19,7 @@ const Home = () => {
     description= {
     <>
     <p className="text-white">
-        I am a 20 year-old software engineering student with a strong desire to 
+        I am a 21 year-old software engineering student with a strong desire to 
         learn and grow in the field.
     </p>
     
