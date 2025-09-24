@@ -97,7 +97,7 @@ const Projects = () => {
     title={  
     
         <div> 
-        <h2>RateMyDino - Professor Summary Web App</h2>
+        <h2 className="mb-2">RateMyDino - Professor Summary Web App</h2>
         <div className="flex flex-row justify-between">
         <p className="text-gray-400 text-sm sm:text-base font-light">
         Python | Next.js | OpenAI API
@@ -134,7 +134,7 @@ A full-stack web application built to help University of Calgary students quickl
     title={  
     
         <div> 
-        <h2> Movie Theatre Reservation Application</h2>
+        <h2 className="mb-2"> Movie Theatre Reservation Application</h2>
         <div className="flex flex-row justify-between">
         <p className="text-gray-400 text-sm sm:text-base font-light">
         Java (Libraries: mysql-connector) | MySQL

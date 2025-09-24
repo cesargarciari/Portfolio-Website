@@ -15,10 +15,22 @@ const itemBase =
   };
 
 
+  const handleProjectsClick = (e: { preventDefault: () => void; }) => {
+  if (location.pathname === "/projects") {
+    e.preventDefault(); // stop NavLink’s default navigation
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } 
+  };
+
+  const handleExperienceClick = (e: { preventDefault: () => void; }) => {
+    if (location.pathname === "/experience") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
 export default function NavBar() {
   return (
-
-    
     <div
       aria-label="Primary"
       className="
@@ -26,7 +38,10 @@ export default function NavBar() {
         fixed inset-x-0 bottom-4 z-50
         flex justify-center
         px-4
-        sm:bottom-6
+        xs:bottom-20
+        sm:bottom-20
+        md:bottom-20
+        lg:bottom-20
       "
     >
       <nav
@@ -55,6 +70,7 @@ export default function NavBar() {
           </NavLink>
 
           <NavLink
+            onClick={handleProjectsClick}
             to="/projects"
             className={({ isActive }) =>
               `${itemBase} ${isActive ? "bg-white/5" : ""}`
@@ -66,6 +82,7 @@ export default function NavBar() {
           </NavLink>
 
           <NavLink
+            onClick={handleExperienceClick}
             to="/experience"
             className={({ isActive }) =>
               `${itemBase} ${isActive ? "bg-white/5" : ""}`
