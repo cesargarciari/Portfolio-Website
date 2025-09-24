@@ -42,22 +42,31 @@ const Home = () => {
     <section className="w-full">
         <h3 className="mb-4">What I work with</h3>
         <TechIcons />
-      </section>
 
-      <section className="w-full">
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className="flex flex-col sm:flex-row items-start gap-3 mt-4">
+          <Button
+            variant="secondary"
+            className="w-full sm:w-auto text-black/80 hover:text-white font-bold"
+            asChild
+          >
+            <a href="/projects" aria-label="View Projects">
+              Check out my projects!
+            </a>
+          </Button>
+
           <Button
             variant="secondary"
             className="w-full sm:w-auto bg-gradient-to-r from-[#00C9FF] to-[#00ffc3] text-shadow-amber-50 hover:cursor-pointer"
+            asChild
           >
-            Download CV
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              Download CV
+            </a>
           </Button>
-        </a>
+        </div>        
       </section>
+
+      
 
       <section>
         <h3 className="mb-4">About me</h3>
