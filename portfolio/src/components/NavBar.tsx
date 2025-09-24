@@ -92,7 +92,7 @@ export default function NavBar() {
           aria-label="Contacto"
         >
           <Mail className="h-5 w-5" />
-          <span className="text-base font-medium tracking-wide">Contacto</span>
+          <span className="text-base font-medium tracking-wide">Contact Me</span>
         </Link>
       </nav>
     </div>
