@@ -11,6 +11,62 @@ const Projects = () => {
 
     <div className="flex flex-col gap-10 mt-4">
 
+        <Card
+title={
+    <div>
+    <h2 className="mb-2">Job Tracker</h2>
+    <div className="flex flex-row justify-between">
+        <p className="text-gray-400 text-sm sm:text-base font-light">
+        Next.js (App Router) | TypeScript | Prisma | Supabase (Postgres) | shadcn/ui
+        </p>
+        <p className="text-gray-400 text-sm sm:text-base font-light mr-15">
+        January 2026
+        </p>
+    </div>
+    </div>
+}
+description={
+    <>
+    <p className="text-white mr-10">
+        A full-stack job application tracker that lets users create, manage, and update their job applications
+        with secure authentication and per-user data isolation. Built with a modern Next.js App Router
+        architecture, using API routes as the server boundary and a clean shadcn/ui interface.
+        <br />
+        <br />
+        <span className="font-bold">Features</span>
+        <br />
+        • Authenticated CRUD: create, view, update status, and delete applications
+        <br />
+        • Authorization enforced at the API layer (users can only access their own records)
+        <br />
+        • Prisma + Supabase Postgres integration with production deployment on Vercel
+        <br />
+        • Clean UI: list view + per-application detail view with editable status
+    </p>
+
+    <div className="mt-4 flex gap-2">
+        {/* Replace these links with your real repo / deployed URL */}
+        <a
+        href="https://github.com/cesargarciari/job-tracker"
+        target="_blank"
+        rel="noopener noreferrer"
+        >
+        <Button variant="secondary" className="home-button">
+            <FaGithub color="#000000" />
+        </Button>
+        </a>
+
+        <a href="https://job-tracker-rose.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <Button variant="secondary" className="home-button">
+            <FaLink color="#000000" />
+        </Button>
+        </a>
+    </div>
+    </>
+}
+/>
+
+
         {/* First */}
         <Card 
     title={  
@@ -55,7 +111,7 @@ const Projects = () => {
     </Card> 
 
     {/* Second */}
-         <Card 
+        <Card 
     title={  
     
         <div> 
@@ -88,8 +144,7 @@ const Projects = () => {
         <Button variant="secondary" className="home-button"><FaGithub color="#000000" /></Button>
         </a>
     </div>
-
-                </>}>
+    </>}>
     </Card> 
     
     {/* Third */}
@@ -139,7 +194,7 @@ A full-stack web application built to help University of Calgary students quickl
         <p className="text-gray-400 text-sm sm:text-base font-light">
         Java (Libraries: mysql-connector) | MySQL
         </p>
-        <p className=" text-gray-400 text-sm sm:text-base font-light mr-15">October-Novemer 2024</p>
+        <p className=" text-gray-400 text-sm sm:text-base font-light mr-15">October-November 2024</p>
         </div>
         </div>}     
     description= {
@@ -167,8 +222,6 @@ A full-stack web application built to help University of Calgary students quickl
 
                 </>}>
     </Card> 
-
-
 
 
     
