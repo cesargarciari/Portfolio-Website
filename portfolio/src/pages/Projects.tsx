@@ -12,37 +12,37 @@ const Projects = () => {
     <div className="flex flex-col gap-10 mt-4">
 
         <Card
-title={
-    <div>
-    <h2 className="mb-2">Job Tracker</h2>
-    <div className="flex flex-row justify-between">
-        <p className="text-gray-400 text-sm sm:text-base font-light">
-        Next.js (App Router) | TypeScript | Prisma | Supabase (Postgres) | shadcn/ui
-        </p>
-        <p className="text-gray-400 text-sm sm:text-base font-light mr-15">
-        January 2026
-        </p>
-    </div>
-    </div>
-}
-description={
-    <>
-    <p className="text-white mr-10">
-        A full-stack job application tracker that lets users create, manage, and update their job applications
-        with secure authentication and per-user data isolation. Built with a modern Next.js App Router
-        architecture, using API routes as the server boundary and a clean shadcn/ui interface.
-        <br />
-        <br />
-        <span className="font-bold">Features</span>
-        <br />
-        • Authenticated CRUD: create, view, update status, and delete applications
-        <br />
-        • Authorization enforced at the API layer (users can only access their own records)
-        <br />
-        • Prisma + Supabase Postgres integration with production deployment on Vercel
-        <br />
-        • Clean UI: list view + per-application detail view with editable status
-    </p>
+        title={
+            <div>
+            <h2 className="mb-2">Job Tracker</h2>
+            <div className="flex flex-row justify-between">
+                <p className="text-gray-400 text-sm sm:text-base font-light">
+                Next.js (App Router) | TypeScript | Prisma | Supabase (Postgres) | shadcn/ui
+                </p>
+                <p className="text-gray-400 text-sm sm:text-base font-light mr-15">
+                January 2026
+                </p>
+            </div>
+            </div>
+        }
+        description={
+            <>
+            <p className="text-white mr-10">
+                A full-stack job application tracker that lets users create, manage, and update their job applications
+                with secure authentication and per-user data isolation. Built with a modern Next.js App Router
+                architecture, using API routes as the server boundary and a clean shadcn/ui interface.
+                <br />
+                <br />
+                <span className="font-bold">Features</span>
+                <br />
+                • Authenticated CRUD: create, view, update status, and delete applications
+                <br />
+                • Authorization enforced at the API layer (users can only access their own records)
+                <br />
+                • Prisma + Supabase Postgres integration with production deployment on Vercel
+                <br />
+                • Clean UI: list view + per-application detail view with editable status
+            </p>
 
     <div className="mt-4 flex gap-2">
         {/* Replace these links with your real repo / deployed URL */}
@@ -66,6 +66,48 @@ description={
 }
 />
 
+        <Card
+        title={
+        <div>
+            <h2 className="mb-2">Unify – Campus Event Platform</h2>
+            <div className="flex flex-row justify-between">
+            <p className="text-gray-400 text-sm sm:text-base font-light">
+                Next.js | FastAPI | PostgreSQL
+            </p>
+            <p className="text-gray-400 text-sm sm:text-base font-light mr-15">
+                Sept–Dec 2025
+            </p>
+            </div>
+        </div>
+        }
+        description={
+        <>
+            <p className="text-white mr-10">
+            A full-stack campus event management platform built as a SENG 513 group project. Unify
+            centralizes event communication by allowing organizers to create events and students
+            to discover activities, RSVP, and receive reminders in one system.
+            <br /><br />
+            <span className="font-bold">Features</span>
+            <br />
+            • Event discovery with search, filters, and category tags
+            <br />
+            • Real-time RSVP system with capacity tracking
+            <br />
+            • Role-based access for students, organizers, admins, and guests
+            <br />
+            • REST API built with FastAPI connected to a PostgreSQL database
+            </p>
+
+            <div className="mt-4 flex gap-2">
+            <a href="https://github.com/cesargarciari/Unify" target="_blank" rel="noopener noreferrer">
+                <Button variant="secondary" className="home-button">
+                <FaGithub color="#000000" />
+                </Button>
+            </a>
+            </div>
+        </>
+        }
+        />
 
         {/* First */}
         <Card 
