@@ -5,8 +5,6 @@ import { GiBookmarklet } from "react-icons/gi";
 import { VscBug } from "react-icons/vsc";
 import { TbBriefcase2Filled } from "react-icons/tb";
 
-
-
 interface ExperienceItem {
   id: string
   title: string
@@ -62,20 +60,20 @@ export function ScrollTimeline() {
       case "Work":
         return <TbBriefcase2Filled />
       case "Education":
-        return <GiBookmarklet/>
+        return <GiBookmarklet />
       case "Internship":
-        return <VscBug/>
+        return <VscBug />
       default:
         return "📍"
     }
   }
 
   return (
-    <div className="min-h-screen bg-primary py-20">
+    <div className="min-h-screen bg-background py-20 safe-bottom">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-white mb-4">My Experience</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-foreground mb-4">My Experience</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A summary of my professional experience
           </p>
         </div>
@@ -83,26 +81,26 @@ export function ScrollTimeline() {
         <div className="relative max-w-4xl mx-auto space-y-12">
           {experiences.map((experience) => (
             <div key={experience.id} className="relative flex items-start">
-              
               <div className="relative z-10 flex-shrink-0">
                 <div
                   className={`w-16 h-16 rounded-full ${getTypeColor(
                     experience.type
-                  )} flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/30 border-4 border-gray-800 ring-2 ring-gray-600`}
+                  )} flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/30 border-4 border-border ring-2 ring-border`}
                 >
                   {getTypeIcon(experience.type)}
                 </div>
               </div>
 
-              
               <div className="ml-8 flex-1">
-                <Card className="shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 border border-gray-700 bg-black-800/90 backdrop-blur-sm">
+                <Card className="shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 border border-border bg-card/90 backdrop-blur-sm">
                   <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <CardTitle className="text-xl font-bold text-white">{experience.title}</CardTitle>
+                      <CardTitle className="text-xl font-bold text-card-foreground">
+                        {experience.title}
+                      </CardTitle>
                       <Badge
                         variant="outline"
-                        className="w-fit border-gray-600 text-gray-300 hover:bg-gray-700"
+                        className="w-fit border-border text-muted-foreground hover:bg-accent"
                       >
                         {experience.type}
                       </Badge>
@@ -110,7 +108,7 @@ export function ScrollTimeline() {
                     <CardDescription className="text-lg font-semibold text-cyan-400">
                       {experience.company}
                     </CardDescription>
-                    <div className="flex flex-col sm:flex-row gap-4 text-sm text-gray-400">
+                    <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <CiCalendar className="w-4 h-4" />
                         {experience.period}
@@ -122,13 +120,15 @@ export function ScrollTimeline() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-300 mb-4 leading-relaxed">{experience.description}</p>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                      {experience.description}
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {experience.skills.map((skill) => (
                         <Badge
                           key={skill}
                           variant="secondary"
-                          className="text-xs bg-gray-700 text-gray-200 hover:bg-gray-600"
+                          className="text-xs bg-secondary text-secondary-foreground hover:bg-accent"
                         >
                           {skill}
                         </Badge>
