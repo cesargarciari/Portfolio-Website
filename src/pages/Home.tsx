@@ -1,30 +1,46 @@
-import Card from "@/components/Card"
-import { TechIcons } from "@/components/TechIcons"
+import { motion } from "motion/react"
+import { Link } from "react-router-dom"
+import { ArrowRight } from "lucide-react"
+import SkillsSection from "@/components/SkillsSection"
 import { Button } from "@/components/ui/button"
+import { FaGithub, FaInstagram } from "react-icons/fa"
+import { IoLogoLinkedin } from "react-icons/io"
 
-import { FaGithub, FaInstagram } from "react-icons/fa";
-import { IoLogoLinkedin } from "react-icons/io";
-
-const Home = () => {
+export default function Home() {
   return (
-    <div className="px-4 sm:px-6 md:px-16 lg:px-32 max-w-5xl mx-auto mt-12 sm:mt-16 w-full flex flex-col gap-12 safe-bottom">
-      <Card
-        title={
-          <div>
-            <h2>César García</h2>
-            <h4><span className="text-gradient-se">Software Engineering</span></h4>
+    <main className="safe-bottom">
+      {/* Hero */}
+      <section className="flex min-h-screen items-center px-4 py-24">
+        <div className="max-w-4xl mx-auto w-full">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-muted-foreground mb-4 text-lg"
+          >
+            Hey there, I'm
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-6"
+          >
+            César García
             <p className="text-muted-foreground text-sm sm:text-base font-light">
               Calgary, Alberta/El Salvador
             </p>
-          </div>
-        }
-        description={
-          <>
-            <p className="text-foreground">
-              I am a 21 year-old software engineering student with a strong desire to
-              learn and grow in the field.
-            </p>
+          </motion.h1>
 
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
+          >
+            A software engineering student passionate about building clean,
+            performant web applications and exploring new technologies.
             <div className="flex flex-row gap-2 mt-4">
               <a href="https://github.com/cesargarciari" target="_blank" rel="noopener noreferrer">
                 <Button variant="secondary" className="home-button">
@@ -44,56 +60,54 @@ const Home = () => {
                 </Button>
               </a>
             </div>
-          </>
-        }
-      />
+          </motion.p>
 
-      <section className="w-full">
-        <h3 className="mb-4">What I work with</h3>
-        <TechIcons />
-
-        <div className="flex flex-col sm:flex-row items-start gap-3 mt-4">
-          <Button variant="secondary" className="w-full sm:w-auto font-bold" asChild>
-            <a href="/projects" aria-label="View Projects">
-              Check out my projects!
-            </a>
-          </Button>
-
-          <Button
-            variant="secondary"
-            className="w-full sm:w-auto bg-gradient-to-r from-[#00C9FF] to-[#00ffc3] hover:cursor-pointer text-black font-semibold"
-            asChild
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-wrap gap-4"
           >
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-              Download CV
-            </a>
-          </Button>
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-primary-foreground font-medium transition hover:bg-primary/90"
+            >
+              View Projects <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-2xl border border-border px-6 py-3 text-foreground font-medium transition hover:bg-accent"
+            >
+              Contact Me
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      <section>
-        <h3 className="mb-4">About me</h3>
-        <p className="text-foreground">
-          I’m a software engineering student with a passion for building clean, functional,
-          and meaningful digital experiences. I enjoy creating full-stack applications,
-          from intuitive frontends to designing solid backend systems. I have a strong
-          interest in web development, particularly using Next.js, Vite, and React.
-          <br /><br />
-          Lately, I’ve been exploring the world of machine learning, curious about how data-driven
-          systems can enhance the way we interact with technology. I’m drawn to minimalist design,
-          both in code and aesthetics.
-          <br /><br />
-          I am currently pursuing my studies at the University of Calgary where I just started my fourth year.
-          <br /><br />
-          I’m originally from <span className="text-gradient-es"> El Salvador </span> and currently based in Calgary, Alberta.
-          Outside of the tech field, I enjoy being outdoors whether it’s hiking or travelling to new
-          places, or more recently, getting into the sport of Padel. I’m also a big sports fan;{" "}
-          <span className="text-gradient-bkb">basketball </span>
-          is my favorite, but I follow and enjoy football just as much.
-        </p>
+      {/* Skills */}
+      <SkillsSection />
+      <section className="px-4 pb-24"> 
+        <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.8 }}
+            className="flex flex-wrap gap-4"
+          >
+        <div className="max-w-4xl mx-auto w-full"> {/* This keeps it aligned with the text above */}
+          <div className="flex flex-col sm:flex-row items-start gap-3 mt-4">
+            <Button
+              variant="secondary"
+              className="w-full sm:w-auto bg-gradient-to-r from-[#00C9FF] to-[#00ffc3] hover:cursor-pointer text-black font-semibold"
+              asChild
+            >
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                Download CV
+              </a>
+            </Button>
+          </div>
+        </div>
+        </motion.div>
       </section>
-    </div>
+    </main>
   )
 }
-
-export default Home
