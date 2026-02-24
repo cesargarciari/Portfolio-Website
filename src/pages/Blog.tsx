@@ -25,7 +25,8 @@ export default function Blog() {
 
         const metas = await Promise.all(
           filenames.map(async (filename) => {
-            const res = await fetch(`/posts/${filename}`)
+            const sanitizedFilename = filename.replace(/[^a-zA-Z0-9-_.]/g, '')
+            const res = await fetch(`/posts/${sanitizedFilename}`)
             if (!res.ok) throw new Error(`Could not load ${filename}`)
             const raw = await res.text()
             const { data } = matter(raw)
