@@ -100,10 +100,10 @@ Be conservative — only change what's necessary. Don't refactor unrelated code.
 
   const message = await client.messages.create({
     model: "claude-sonnet-4-6",
-    max_tokens: 17500,
+    max_tokens: 10000,
     thinking: { 
       type: "adaptive",
-      effort: "medium"
+      effort: "low"
     },
     messages: [{ 
       role: "user", 
