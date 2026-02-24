@@ -100,9 +100,21 @@ Be conservative — only change what's necessary. Don't refactor unrelated code.
 
   const message = await client.messages.create({
     model: "claude-sonnet-4-6",
-    max_tokens: 8192,
-    thinking: { type: "adaptive" },
-    messages: [{ role: "user", content: prompt }],
+    max_tokens: 17500,
+    thinking: { 
+      type: "adaptive",
+      effort: "medium"
+    },
+    messages: [{ 
+      role: "user", 
+      content: [
+      {
+        type: "text",
+        text: prompt,
+        cache_control: { type: "ephemeral" } 
+      }
+    ]
+    }],
   });
 
   const textBlock = message.content.find(block => block.type === 'text');
