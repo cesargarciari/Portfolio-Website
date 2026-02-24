@@ -4,6 +4,8 @@ import Projects from "./pages/Projects"
 import Experience from "./pages/Experience"
 import Contact from "./pages/Contact"
 import Home from "./pages/Home"
+import Blog from "./pages/Blog"
+import BlogPost from "./pages/BlogPost"
 import Footer from "./components/Footer"
 import NotFound from "./pages/404"
 import { ThemeProvider } from "./components/theme-provider"
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/experience" element={<Experience />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
