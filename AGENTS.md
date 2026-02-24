@@ -1,17 +1,23 @@
 # Agent Guidelines
 
 ## Stack
-- Vite + React + TypeScript
-- Tailwind
+- Vite + React 19 + TypeScript
+- Tailwind CSS v4
+- Framer Motion (for animations)
+- Radix UI (for accessible primitives)
+- React Router v7
 
 ## Conventions
-- Functional components only, no class components
-- Always use TypeScript interfaces, not types, for props
+- Functional components only, no class components.
+- Always use TypeScript interfaces, not types, for props.
 - Components live in src/components/
 - Pages live in src/pages/
-- [add any other patterns you use]
+- Use the `cn()` utility for merging Tailwind classes.
+- Prioritize Lucide React for icons.
+- Use 'motion' from the `motion` package for animations.
 
 ## Do Not Touch
 - vercel.json
 - vite.config.ts
 - .github/workflows/
+- package.json (unless adding a specific dependency)
