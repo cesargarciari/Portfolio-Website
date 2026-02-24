@@ -114,7 +114,11 @@ export default function SkillsSection() {
                         duration: 0.3,
                         delay: categoryIndex * 0.1 + skillIndex * 0.04,
                       }}
-                      whileHover={{ scale: 1.15, y: -4 }}
+                      whileHover={{ 
+                        scale: 1.15, 
+                        y: -4,
+                        transition: { duration: 0.2, delay: 0.1 }
+                      }}
                       className="block"
                       title={skill.label}
                       aria-label={skill.label}
