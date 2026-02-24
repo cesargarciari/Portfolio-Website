@@ -44,15 +44,18 @@ jobs:
           git commit -m "feat: ${{ github.event.issue.title }}"
           git push origin $BRANCH
 
-          SUMMARY=$(cat .github/scripts/pr-summary.txt)
+          if [ -f .github/scripts/pr-summary.txt ]; then
+            SUMMARY=$(cat .github/scripts/pr-summary.txt)
+          else
+            SUMMARY="No summary available."
+          fi
+
           gh pr create \
             --title "AI: ${{ github.event.issue.title }}" \
             --body "Closes #${{ github.event.issue.number }}
 
-          ## AI Summary
           $SUMMARY
 
-          ## Review Checklist
           - [ ] Code follows project conventions
           - [ ] No unintended changes
           - [ ] Looks good to deploy" \
