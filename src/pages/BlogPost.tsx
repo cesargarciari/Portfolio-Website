@@ -20,30 +20,34 @@ export default function BlogPost() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!slug) return
+  if (!slug) return;
+  const currentSlug = slug; 
 
-    async function loadPost() {
-      try {
-        const sanitizedSlug = slug.replace(/[^a-zA-Z0-9-_]/g, '')
-        const res = await fetch(`/posts/${sanitizedSlug}.md`)
-        if (!res.ok) throw new Error("Post not found.")
-        const raw = await res.text()
-        const { data, content } = matter(raw)
-        setPost({
-          title: data.title ?? slug,
-          date: data.date ?? "",
-          description: data.description ?? "",
-          content,
-        })
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Unknown error")
-      } finally {
-        setLoading(false)
-      }
+  async function loadPost() {
+    try {
+      const sanitizedSlug = currentSlug.replace(/[^a-zA-Z0-9-_]/g, '')
+      const res = await fetch(`/posts/${sanitizedSlug}.md`)
+      
+      if (!res.ok) throw new Error("Post not found.")
+      
+      const raw = await res.text()
+      const { data, content } = matter(raw)
+      
+      setPost({
+        title: data.title ?? currentSlug, 
+        date: data.date ?? "",
+        description: data.description ?? "",
+        content,
+      })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unknown error")
+    } finally {
+      setLoading(false)
     }
+  }
 
-    loadPost()
-  }, [slug])
+  loadPost()
+}, [slug])
 
   return (
     <main className="min-h-screen bg-background text-foreground">
