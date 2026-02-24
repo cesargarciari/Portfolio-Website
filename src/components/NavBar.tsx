@@ -1,5 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
-import { Home, Github, FileText, Mail } from "lucide-react";
+import { Home, Github, FileText, BookOpen, Mail } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 
 const iconBase =
@@ -24,6 +24,13 @@ const handleProjectsClick = (e: { preventDefault: () => void }) => {
 
 const handleExperienceClick = (e: { preventDefault: () => void }) => {
   if (location.pathname === "/experience") {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
+
+const handleBlogClick = (e: { preventDefault: () => void }) => {
+  if (location.pathname === "/blog") {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -91,6 +98,18 @@ export default function NavBar() {
             title="Experience"
           >
             <FileText className={iconBase} />
+          </NavLink>
+
+          <NavLink
+            onClick={handleBlogClick}
+            to="/blog"
+            className={({ isActive }) =>
+              `${itemBase} ${isActive ? "bg-accent/50" : ""}`
+            }
+            aria-label="Blog"
+            title="Blog"
+          >
+            <BookOpen className={iconBase} />
           </NavLink>
 
           <span className="mx-1 hidden h-6 w-px bg-border md:block" />
