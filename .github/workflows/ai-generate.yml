@@ -1,0 +1,67 @@
+name: AI Code Generation
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  generate:
+
+    if: github.event.label.name == 'ai-generate'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install @anthropic-ai/sdk
+
+      - name: Generate code
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node .github/scripts/generate.js \
+            "${{ github.event.issue.title }}" \
+            "${{ github.event.issue.body }}"
+
+      - name: Create branch and PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="ai/issue-${{ github.event.issue.number }}"
+          git config user.name "AI Agent"
+          git config user.email "ai-agent@users.noreply.github.com"
+          git checkout -b $BRANCH
+          git add -A
+          git commit -m "feat: ${{ github.event.issue.title }}"
+          git push origin $BRANCH
+
+          SUMMARY=$(cat .github/scripts/pr-summary.txt)
+          gh pr create \
+            --title "AI: ${{ github.event.issue.title }}" \
+            --body "Closes #${{ github.event.issue.number }}
+
+          ## AI Summary
+          $SUMMARY
+
+          ## Review Checklist
+          - [ ] Code follows project conventions
+          - [ ] No unintended changes
+          - [ ] Looks good to deploy" \
+            --base main \
+            --head $BRANCH
+
+      - name: Comment on issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} \
+            --body "🤖 PR created! Greptile is reviewing the code now."
