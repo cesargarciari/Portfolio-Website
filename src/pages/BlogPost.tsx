@@ -24,7 +24,8 @@ export default function BlogPost() {
 
     async function loadPost() {
       try {
-        const res = await fetch(`/posts/${slug}.md`)
+        const sanitizedSlug = slug.replace(/[^a-zA-Z0-9-_]/g, '')
+        const res = await fetch(`/posts/${sanitizedSlug}.md`)
         if (!res.ok) throw new Error("Post not found.")
         const raw = await res.text()
         const { data, content } = matter(raw)
