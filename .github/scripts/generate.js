@@ -74,33 +74,41 @@ async function generateCode(issueTitle, issueBody) {
 
   const prompt = `You are an AI developer working on a personal portfolio website built with Vite, React, and TypeScript.
 
-${context}
+    ${context}
 
-## Task
-Issue Title: ${issueTitle}
-Issue Description: ${issueBody}
+    ## Task
+    Issue Title: ${issueTitle}
+    Issue Description: ${issueBody}
 
-## Instructions
-1. Read AGENTS.md carefully and follow all conventions
-2. Generate the complete file changes needed to implement this feature
-3. Return ONLY a JSON object in this exact format, no other text:
+    ## Instructions
+    1. Read AGENTS.md carefully and follow all conventions.
+    2. Generate the complete file changes needed to implement this feature.
+    3. Return your response in this EXACT format — one block per file, nothing else outside the tags:
 
-{
-  "summary": "Brief description of what you changed",
-  "files": [
-    {
-      "path": "src/components/Example.tsx",
-      "content": "full file content here",
-      "action": "create" | "modify" | "delete"
-    }
-  ]
-}
+    <summary>Brief description of what you changed</summary>
 
-Be conservative — only change what's necessary. Don't refactor unrelated code.`;
+    <file>
+    <path>src/components/Example.tsx</path>
+    <action>create</action>
+    <content>
+    FULL FILE CONTENT HERE
+    </content>
+    </file>
+
+    <file>
+    <path>src/App.tsx</path>
+    <action>modify</action>
+    <content>
+    FULL FILE CONTENT HERE
+    </content>
+    </file>
+
+    Be conservative — only change what is necessary. Do not refactor unrelated code.`;
+
 
   const message = await client.messages.create({
     model: "claude-sonnet-4-6",
-    max_tokens: 10000,
+    max_tokens: 16000,
     messages: [{ 
       role: "user", 
       content: [
@@ -115,18 +123,31 @@ Be conservative — only change what's necessary. Don't refactor unrelated code.
 
   const textBlock = message.content.find(block => block.type === 'text');
 
-if (!textBlock) {
-  throw new Error("The AI didn't return a text response. Check if it only returned 'thinking'.");
-}
+  if (!textBlock) {
+    throw new Error("The AI didn't return a text response.");
+  }
 
-const responseText = textBlock.text;
+  const responseText = textBlock.text;
 
-const jsonMatch = responseText.match(/```(?:json)?\s*([\s\S]*?)```/) ||
-                  responseText.match(/(\{[\s\S]*\})/);
+  // Parse summary
+  const summaryMatch = responseText.match(/<summary>([\s\S]*?)<\/summary>/);
+  const summary = summaryMatch ? summaryMatch[1].trim() : "AI-generated changes";
 
-if (!jsonMatch) throw new Error("Could not parse JSON from LLM response");
+  // Parse files using XML tags
+  const fileMatches = [...responseText.matchAll(/<file>\s*<path>([\s\S]*?)<\/path>\s*<action>([\s\S]*?)<\/action>\s*<content>\n?([\s\S]*?)<\/content>\s*<\/file>/g)];
 
-return JSON.parse(jsonMatch[1]);
+  if (fileMatches.length === 0) {
+    console.error("Raw response:\n", responseText);
+    throw new Error("Could not parse any files from LLM response");
+  }
+
+  const files = fileMatches.map(match => ({
+    path: match[1].trim(),
+    action: match[2].trim(),
+    content: match[3],
+  }));
+
+  return { summary, files };
 }
 
 const DO_NOT_TOUCH = ["vercel.json", "vite.config.ts", ".github/workflows/"];
