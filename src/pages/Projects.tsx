@@ -35,7 +35,6 @@ const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Prisma", "Supabase", "shadcn/ui"],
     date: "January 2026",
     github: "https://github.com/cesargarciari/job-tracker",
-    live: "https://job-tracker-rose.vercel.app/",
   },
   {
     id: "unify",
