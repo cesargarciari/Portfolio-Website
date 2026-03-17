@@ -26,6 +26,67 @@ const projects: Project[] = [
     github: "https://github.com/ZeengFong/CursorHackathon/",
     live: "https://braindump.lucasuanez.codes",
   },
+  {
+    id: "job-tracker",
+    name: "Job Tracker",
+    tagline: "A full-stack job application tracker with secure authentication and per-user data isolation.",
+    description:
+      "A full-stack job application tracker that lets users create, manage, and update their job applications with secure authentication and per-user data isolation. Built with a modern Next.js App Router architecture, using API routes as the server boundary and a clean shadcn/ui interface. Features authenticated CRUD, authorization enforced at the API layer, Prisma + Supabase Postgres integration, and a clean list view with per-application detail and editable status.",
+    stack: ["Next.js", "TypeScript", "Prisma", "Supabase", "shadcn/ui"],
+    date: "January 2026",
+    github: "https://github.com/cesargarciari/job-tracker",
+    live: "https://job-tracker-rose.vercel.app/",
+  },
+  {
+    id: "unify",
+    name: "Unify – Campus Event Platform",
+    tagline: "A campus event management platform centralizing event discovery, RSVPs, and reminders for students.",
+    description:
+      "A full-stack campus event management platform built as a SENG 513 group project. Unify centralizes event communication by allowing organizers to create events and students to discover activities, RSVP, and receive reminders in one system. Features event discovery with search, filters, and category tags, a real-time RSVP system with capacity tracking, role-based access for students, organizers, admins, and guests, and a REST API built with FastAPI connected to a PostgreSQL database.",
+    stack: ["Next.js", "FastAPI", "PostgreSQL"],
+    date: "Sept–Dec 2025",
+    github: "https://github.com/cesargarciari/Unify",
+  },
+  {
+    id: "portfolio",
+    name: "Portfolio Website",
+    tagline: "A responsive, minimalistic portfolio built from scratch to showcase projects, skills, and experience.",
+    description:
+      "A responsive, minimalistic web portfolio designed to showcase my software development projects, skills, and experience. The site focuses on performance, accessibility, and clean design. It includes minimalist animations, organized project cards, and a dynamic layout optimized for all devices. Developed from scratch using modern frontend tools with fully responsive, reusable, scalable components in TypeScript.",
+    stack: ["Vite", "React", "TypeScript", "Tailwind CSS"],
+    date: "April–May 2025",
+    github: "https://github.com/cesargarciari/PortfolioWebsite",
+  },
+  {
+    id: "nba-mvp",
+    name: "NBA MVP Ranking Model",
+    tagline: "A machine learning predictor that ranks NBA MVP candidates based on historical player statistics.",
+    description:
+      "A machine learning-based predictor that determines the Most Valuable Player (MVP) for the NBA based on historical player statistics and performance metrics. Predicts MVP candidates using multiple ML models (Regression and Random Forest), supports classification and ranking of players, and includes data preprocessing, feature engineering, and model evaluation.",
+    stack: ["Python", "Pandas", "Scikit-Learn"],
+    date: "March–April 2025",
+    github: "https://github.com/cesargarciari/NBA-MVP-Predictor",
+  },
+  {
+    id: "ratemydino",
+    name: "RateMyDino",
+    tagline: "A web app helping University of Calgary students quickly understand professor reviews via AI summaries.",
+    description:
+      "A full-stack web application built to help University of Calgary students quickly understand professor reviews using AI-generated summaries from RateMyProfessor data. Features a Python backend with prompt engineering for OpenAI API integration, a SQL database with a layered MVC architecture, and a React (Next.js) frontend with dynamic professor pages.",
+    stack: ["Python", "Next.js", "OpenAI API"],
+    date: "January–March 2025",
+    live: "https://ratemydino.vercel.app/",
+  },
+  {
+    id: "movie-theatre",
+    name: "Movie Theatre Reservation App",
+    tagline: "A Java desktop application with a GUI for managing movie theatre reservations backed by a SQL database.",
+    description:
+      "A Java-based desktop application with a graphical user interface for managing a movie theatre reservation system. Designed to reinforce Object-Oriented Programming principles. Features a Java-built GUI, add/update/search/delete reservation operations, OOP principles including encapsulation, inheritance, and polymorphism, and a SQL database connection for persistent storage.",
+    stack: ["Java", "mysql-connector", "MySQL"],
+    date: "October–November 2024",
+    github: "https://github.com/cesargarciari/Movie-Management-System",
+  },
 ]
 
 export default function Projects() {
