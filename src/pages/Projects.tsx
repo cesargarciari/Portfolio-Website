@@ -16,6 +16,16 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: "chipy",
+    name: "Chipy",
+    tagline: "Full-stack NBA career simulator with deterministic, seeded-RNG engine running client and server side.",
+    description:
+      "Build a player from high school through college, draft, and 15+ pro seasons of contracts, trades, playoffs, and legacy stats. Pure TypeScript engine (seeded RNG) runs client-side for instant offline play and server-side as source of truth on career save/share. Ships as serverless AWS stack (S3/CloudFront, Lambda, DynamoDB), Terraform-provisioned, GitHub Actions deploy. Monorepo, one shared zod-validated API contract between client and server.",
+    stack: ["TypeScript", "AWS", "Terraform", "Lambda", "DynamoDB", "CloudFront", "Zod", "GitHub Actions"],
+    date: "Aug 2026 - Present",
+    live: "https://chipy.cesargarciar.dev",
+  },
+  {
     id: "braindump",
     name: "BrainDump",
     tagline: "A cognitive relief tool designed to reduce overwhelm by narrowing focus to 3–4 tasks using AI-driven triage.",

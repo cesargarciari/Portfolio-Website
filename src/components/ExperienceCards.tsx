@@ -18,6 +18,17 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
+    id: "3",
+    title: "Biomechanics Data Pipeline Capstone",
+    company: "Canadian Sport Institute Alberta",
+    location: "Calgary, AB",
+    period: "September 2025 - April 2026",
+    description:
+      "Built end-to-end Python pipelines turning drone-captured video into biomechanical joint-angle metrics, validated against clinical-grade motion capture hardware (85% correlation). Designed automated evaluation tooling: per-joint RMSE, MAE, Pearson r, cross-correlation-based temporal alignment, fuzzy column matching to align messy real-world data against ground truth. Applied custom signal processing (zero-phase Butterworth filtering, median filtering) to extract clean sagittal-plane kinematics from raw pose-estimation output.",
+    skills: ["Python", "Signal Processing", "Pose Estimation", "Data Pipelines"],
+    type: "Education",
+  },
+  {
     id: "1",
     title: "Software Engineer Backend Intern",
     company: "Grupo Roble",
