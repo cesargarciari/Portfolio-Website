@@ -44,6 +44,7 @@ const skillCategories: SkillCategory[] = [
       { key: "supabase",   label: "Supabase",   url: "https://supabase.com/" },
       { key: "mysql",      label: "MySQL",      url: "https://www.mysql.com/" },
       { key: "prisma",     label: "Prisma",     url: "https://www.prisma.io/" },
+      { key: "dynamodb",     label: "DynamoDB",     url: "https://aws.amazon.com/dynamodb/" },
     ],
   },
   {
@@ -57,12 +58,14 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    name: "AI & Automation",
+    name: "AI, Automation and Cloud",
     skills: [
       { key: "githubactions", label: "GitHub Actions", url: "https://github.com/features/actions" },
-      { key: "claude",        label: "Claude AI",      url: "https://claude.ai/" },
       { key: "greptile",      label: "Greptile",       url: "https://greptile.com/" },
       { key: "vercel",        label: "Vercel",         url: "https://vercel.com/" },
+      { key: "aws",           label: "AWS",            url: "https://aws.amazon.com/" },
+      { key: "terraform",     label: "Terraform",      url: "https://www.terraform.io/" },
+      { key: "claude",        label: "Claude AI",      url: "https://platform.claude.com" },
     ],
   },
 ]
@@ -93,7 +96,9 @@ export default function SkillsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             >
-              <h4 className="text-muted-foreground mb-4">{category.name}</h4>
+              <h3 className="text-muted-foreground mb-4 text-lg font-semibold sm:text-xl">
+                {category.name}
+              </h3>
               <div className="flex flex-wrap gap-4">
                 {category.skills.map((skill, skillIndex) => {
                   const iconUrl = 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -32,6 +32,7 @@
   --color-ring: var(--ring);
 
   --color-glass: var(--glass);
+  --color-signal: var(--signal);
 }
 
 @layer base {
@@ -61,6 +62,7 @@
     --ring: #0f172a;
 
     --glass: color-mix(in oklab, #ffffff 75%, transparent);
+    --signal: #b45309;
   }
 
   .dark {
@@ -89,6 +91,7 @@
     --ring: #f8fafc;
 
     --glass: color-mix(in oklab, #0b0b0c 60%, transparent);
+    --signal: #fbbf24;
   }
 
   html,
