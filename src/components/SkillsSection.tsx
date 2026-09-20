@@ -65,7 +65,6 @@ const skillCategories: SkillCategory[] = [
       { key: "vercel",        label: "Vercel",         url: "https://vercel.com/" },
       { key: "aws",           label: "AWS",            url: "https://aws.amazon.com/" },
       { key: "terraform",     label: "Terraform",      url: "https://www.terraform.io/" },
-      { key: "claude",        label: "Claude AI",      url: "https://platform.claude.com" },
     ],
   },
 ]
