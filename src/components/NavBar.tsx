@@ -1,12 +1,16 @@
 import { NavLink, Link } from "react-router-dom";
-import { Home, Github, FileText, Mail } from "lucide-react";
+import { Home, Github, FileText, Mail, type LucideIcon } from "lucide-react";
+import { motion } from "motion/react";
 import { ModeToggle } from "./mode-toggle";
 
 const iconBase =
-  "h-6 w-6 text-foreground transition-opacity opacity-80 group-hover:opacity-100 group-focus:opacity-100";
+  "relative h-6 w-6 text-foreground transition-opacity opacity-80 group-hover:opacity-100 group-focus:opacity-100";
 
 const itemBase =
-  "group inline-flex items-center justify-center h-12 w-12 rounded-xl hover:bg-accent/40 focus:bg-accent/40 outline-none";
+  "group relative inline-flex items-center justify-center h-12 w-12 rounded-xl transition-colors duration-150 hover:bg-accent/40 focus:bg-accent/40 outline-none";
+
+// Apple-style spring: lively without overshooting into a bounce that fights the click.
+const PILL_SPRING = { type: "spring", duration: 0.5, bounce: 0.2 } as const;
 
 const handleHomeClick = (e: { preventDefault: () => void }) => {
   if (location.pathname === "/") {
@@ -29,6 +33,34 @@ const handleExperienceClick = (e: { preventDefault: () => void }) => {
   }
 };
 
+function NavItem({
+  to,
+  icon: Icon,
+  label,
+  onClick,
+}: {
+  to: string;
+  icon: LucideIcon;
+  label: string;
+  onClick: (e: { preventDefault: () => void }) => void;
+}) {
+  return (
+    <NavLink onClick={onClick} to={to} className={itemBase} aria-label={label} title={label} end>
+      {({ isActive }) => (
+        <>
+          {isActive && (
+            <motion.span
+              layoutId="nav-active-pill"
+              className="absolute inset-0 rounded-xl bg-accent/50"
+              transition={PILL_SPRING}
+            />
+          )}
+          <Icon className={iconBase} />
+        </>
+      )}
+    </NavLink>
+  );
+}
 
 export default function NavBar() {
   return (
@@ -58,41 +90,14 @@ export default function NavBar() {
         "
       >
         <div className="flex items-center gap-2 md:gap-3">
-          <NavLink
-            onClick={handleHomeClick}
-            to="/"
-            className={({ isActive }) =>
-              `${itemBase} ${isActive ? "bg-accent/50" : ""}`
-            }
-            aria-label="Home"
-            title="Home"
-          >
-            <Home className={iconBase} />
-          </NavLink>
-
-          <NavLink
-            onClick={handleProjectsClick}
-            to="/projects"
-            className={({ isActive }) =>
-              `${itemBase} ${isActive ? "bg-accent/50" : ""}`
-            }
-            aria-label="Projects"
-            title="Projects"
-          >
-            <Github className={iconBase} />
-          </NavLink>
-
-          <NavLink
-            onClick={handleExperienceClick}
+          <NavItem to="/" icon={Home} label="Home" onClick={handleHomeClick} />
+          <NavItem to="/projects" icon={Github} label="Projects" onClick={handleProjectsClick} />
+          <NavItem
             to="/experience"
-            className={({ isActive }) =>
-              `${itemBase} ${isActive ? "bg-accent/50" : ""}`
-            }
-            aria-label="Experience"
-            title="Experience"
-          >
-            <FileText className={iconBase} />
-          </NavLink>
+            icon={FileText}
+            label="Experience"
+            onClick={handleExperienceClick}
+          />
 
           <span className="mx-1 hidden h-6 w-px bg-border md:block" />
         </div>
@@ -103,7 +108,7 @@ export default function NavBar() {
             inline-flex items-center gap-2
             rounded-2xl bg-secondary px-5 py-2
             text-secondary-foreground hover:bg-accent
-            transition border border-border
+            transition-colors duration-150 border border-border
           "
           aria-label="Contact"
         >
