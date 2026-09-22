@@ -1,3 +1,4 @@
+import { motion } from "motion/react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CiCalendar, CiMapPin } from "react-icons/ci"
@@ -69,13 +70,19 @@ export function ScrollTimeline() {
   return (
     <div className="min-h-screen bg-background py-20 safe-bottom">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <p className="eyebrow mb-3">Timeline</p>
           <h1 className="mb-4">My Experience</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A summary of my professional experience
           </p>
-        </div>
+        </motion.div>
 
         <div className="relative max-w-4xl mx-auto space-y-12">
           <div
@@ -83,8 +90,15 @@ export function ScrollTimeline() {
             className="absolute left-8 top-8 bottom-8 hidden w-px -translate-x-1/2 bg-linear-to-b from-border via-border to-transparent sm:block"
           />
 
-          {experiences.map((experience) => (
-            <div key={experience.id} className="relative flex items-start">
+          {experiences.map((experience, index) => (
+            <motion.div
+              key={experience.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative flex items-start"
+            >
               <div className="relative z-10 hidden shrink-0 sm:block">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full border border-signal/30 bg-card text-xl text-signal ring-4 ring-background">
                   {getTypeIcon(experience.type)}
@@ -137,7 +151,7 @@ export function ScrollTimeline() {
                   </CardContent>
                 </Card>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

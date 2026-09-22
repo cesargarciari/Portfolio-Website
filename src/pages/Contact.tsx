@@ -1,3 +1,4 @@
+import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
 import { FaDiscord, FaInstagram, FaLinkedin } from "react-icons/fa"
 import { GrMailOption } from "react-icons/gr"
@@ -11,7 +12,13 @@ const iconWrapBase =
 const Contact = () => {
   return (
     <div className="px-4 sm:px-6 md:px-16 lg:px-32 max-w-5xl mx-auto mt-12 sm:mt-16 w-full flex flex-col gap-12 safe-bottom">
-      <div className={cn("surface-card relative p-6 sm:p-8")}>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+        className={cn("surface-card relative p-6 sm:p-8")}
+      >
         <p className="eyebrow mb-3">Get in touch</p>
         <h3 className="mb-2 text-xl font-semibold text-foreground">Contact me</h3>
 
@@ -67,7 +74,7 @@ const Contact = () => {
             </span>
           </a>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

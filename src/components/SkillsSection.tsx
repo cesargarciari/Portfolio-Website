@@ -107,11 +107,8 @@ export default function SkillsSection() {
                     `https://skillicons.dev/icons?i=${skill.key}`;
 
                   return (
-                    <motion.a
+                    <motion.div
                       key={skill.key}
-                      href={skill.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       initial={{ opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
@@ -120,17 +117,15 @@ export default function SkillsSection() {
                         delay: categoryIndex * 0.1 + skillIndex * 0.03,
                       }}
                       whileHover={{ y: -3, transition: { type: "spring", duration: 0.3, bounce: 0 } }}
-                      whileTap={{ scale: 0.94 }}
-                      className="group flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card outline-none transition-[border-color,box-shadow] duration-150 hover:border-foreground/20 hover:shadow-[0_8px_20px_-12px_rgba(15,23,42,0.3)] focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-2 dark:hover:shadow-[0_8px_20px_-12px_rgba(0,0,0,0.6)]"
+                      className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card transition-[border-color,box-shadow] duration-150 hover:border-foreground/20 hover:shadow-[0_8px_20px_-12px_rgba(15,23,42,0.3)] dark:hover:shadow-[0_8px_20px_-12px_rgba(0,0,0,0.6)]"
                       title={skill.label}
-                      aria-label={skill.label}
                     >
                       <img
                         src={iconUrl}
-                        alt=""
+                        alt={skill.label}
                         className="h-7 w-7 object-contain"
                       />
-                    </motion.a>
+                    </motion.div>
                   );
                 })}
               </div>
