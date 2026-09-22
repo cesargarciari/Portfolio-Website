@@ -1,7 +1,7 @@
 import { motion } from "motion/react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Github, ExternalLink, Calendar } from "lucide-react"
+import { Github, ExternalLink, Calendar, ArrowRight } from "lucide-react"
 
 interface Project {
   id: string
@@ -101,59 +101,47 @@ const projects: Project[] = [
 export default function Projects() {
   return (
     <main className="min-h-screen bg-background py-20 safe-bottom">
-      <div className="container mx-auto px-4 max-w-4xl">
+      <div className="container mx-auto px-4 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
+          <p className="eyebrow mb-3">Selected Work</p>
           <h1 className="mb-4">Projects</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A collection of things I've built
           </p>
         </motion.div>
 
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              whileHover={{ y: -4, transition: { type: "spring", duration: 0.35, bounce: 0 } }}
+              className="h-full"
             >
-              <Card className="h-full flex flex-col hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 border border-border bg-card/90 backdrop-blur-sm">
+              <Card className="h-full flex flex-col hover:border-foreground/15 hover:shadow-[0_20px_48px_-24px_rgba(15,23,42,0.4)] dark:hover:shadow-[0_20px_48px_-24px_rgba(0,0,0,0.75)]">
                 <CardHeader>
-                  <div className="flex items-start justify-between gap-2">
-                    <CardTitle className="text-xl font-bold text-card-foreground">
-                      {project.name}
-                    </CardTitle>
-                    <div className="flex items-center gap-2 shrink-0">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${project.name} GitHub repository`}
-                          className="text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          <Github className="h-5 w-5" />
-                        </a>
-                      )}
-                      {project.live && (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${project.name} live demo`}
-                          className="text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          <ExternalLink className="h-5 w-5" />
-                        </a>
-                      )}
-                    </div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      ~/{project.id}
+                    </span>
+                    {project.live && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-signal">
+                        <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+                        Live
+                      </span>
+                    )}
                   </div>
-                  <CardDescription className="text-sm font-medium text-cyan-400">
+                  <CardTitle className="text-2xl font-bold tracking-tight text-card-foreground">
+                    {project.name}
+                  </CardTitle>
+                  <CardDescription className="text-sm font-medium text-foreground/75">
                     {project.tagline}
                   </CardDescription>
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -165,7 +153,7 @@ export default function Projects() {
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
+                  <div className="flex flex-wrap gap-2">
                     {project.stack.map((tech) => (
                       <Badge
                         key={tech}
@@ -176,6 +164,34 @@ export default function Projects() {
                       </Badge>
                     ))}
                   </div>
+
+                  {(project.github || project.live) && (
+                    <div className="mt-auto flex items-center gap-5 border-t border-border pt-4">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
+                        >
+                          <Github className="h-4 w-4" />
+                          Code
+                        </a>
+                      )}
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          Visit
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5" />
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>

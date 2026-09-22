@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-primary: 'Poppins', sans-serif;
+  --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --breakpoint-xs: 480px;
 
   --color-background: var(--background);
@@ -33,6 +35,7 @@
 
   --color-glass: var(--glass);
   --color-signal: var(--signal);
+  --color-surface-2: var(--surface-2);
 }
 
 @layer base {
@@ -63,6 +66,8 @@
 
     --glass: color-mix(in oklab, #ffffff 75%, transparent);
     --signal: #b45309;
+    --surface-2: #f8f9fb;
+    --glow: color-mix(in oklab, var(--signal) 20%, transparent);
   }
 
   .dark {
@@ -92,6 +97,8 @@
 
     --glass: color-mix(in oklab, #0b0b0c 60%, transparent);
     --signal: #fbbf24;
+    --surface-2: #101113;
+    --glow: color-mix(in oklab, var(--signal) 14%, transparent);
   }
 
   html,
@@ -107,7 +114,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-primary antialiased;
+    @apply bg-background text-foreground font-body antialiased;
+    line-height: 1.6;
   }
 
   main {
@@ -115,22 +123,45 @@
   }
 
   h1 {
-    @apply text-foreground text-3xl sm:text-5xl md:text-6xl font-bold;
+    @apply text-foreground font-primary text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight;
+    line-height: 1.05;
   }
   h2 {
-    @apply text-foreground text-3xl xs:text-3xl sm:text-3xl md:text-5xl font-bold;
+    @apply text-foreground font-primary text-3xl xs:text-3xl sm:text-3xl md:text-5xl font-bold tracking-tight;
+    line-height: 1.1;
   }
   h3 {
-    @apply text-foreground text-2xl sm:text-2xl md:text-3xl font-semibold;
+    @apply text-foreground font-primary text-2xl sm:text-2xl md:text-3xl font-semibold tracking-tight;
+    line-height: 1.2;
   }
   h4 {
-    @apply text-lg sm:text-xl font-semibold;
+    @apply text-lg sm:text-xl font-semibold font-primary tracking-tight;
   }
 
   a {
     @apply underline-offset-4;
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --border: #94a3b8;
+  }
+  .dark {
+    --border: #52525b;
+  }
 }
 
 @layer components {
@@ -143,7 +174,7 @@
   }
 
   .home-button {
-    @apply hover:cursor-pointer;
+    @apply hover:cursor-pointer active:scale-90 transition-transform duration-150;
   }
 
   .safe-bottom {
@@ -162,6 +193,25 @@
 
 @utility text-gradient-se {
   @apply bg-linear-to-r from-[#a6eaff] to-[#00a6ff] bg-clip-text text-transparent;
+}
+
+@utility ambient-glow {
+  background-image:
+    radial-gradient(60% 50% at 18% 12%, var(--glow), transparent 70%),
+    radial-gradient(40% 40% at 85% 30%, var(--glow), transparent 70%);
+}
+
+@utility eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground;
+}
+
+@utility surface-card {
+  @apply rounded-2xl border border-border bg-card;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -20px rgba(15, 23, 42, 0.35);
+}
+
+.dark .surface-card {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset, 0 12px 32px -18px rgba(0, 0, 0, 0.55);
 }
 
 

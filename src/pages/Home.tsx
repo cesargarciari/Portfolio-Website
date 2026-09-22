@@ -1,6 +1,6 @@
 import { motion } from "motion/react"
 import { Link } from "react-router-dom"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
 import SkillsSection from "@/components/SkillsSection"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -14,8 +14,10 @@ export default function Home() {
   return (
     <main className="safe-bottom">
 
-      <section className="flex min-h-screen items-center px-4 py-24">
-        <div className="mx-auto grid w-full max-w-6xl gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <section className="relative flex min-h-screen items-center overflow-hidden px-4 py-24">
+        <div aria-hidden className="ambient-glow pointer-events-none absolute inset-0" />
+
+        <div className="relative mx-auto grid w-full max-w-6xl gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -31,7 +33,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-4 text-6xl leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl"
+              className="mb-4 text-[clamp(2.75rem,2.2rem+3.6vw,6.5rem)] leading-[0.95] tracking-[-0.03em]"
             >
               César García
             </motion.h1>
@@ -111,16 +113,26 @@ export default function Home() {
             >
               <Link
                 to="/projects"
-                className="inline-flex items-center gap-2 rounded-2xl bg-primary px-8 py-4 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                
+                className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-8 py-4 font-medium text-primary-foreground shadow-[0_8px_24px_-12px_rgba(0,0,0,0.4)] transition-[background-color,transform,box-shadow] duration-150 hover:bg-primary/90 hover:shadow-[0_10px_28px_-12px_rgba(0,0,0,0.5)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                View Projects <ArrowRight className="h-4 w-4" />
+                View Projects{" "}
+                <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-2xl border border-border px-8 py-4 font-medium text-foreground transition-colors hover:bg-accent"
+                className="inline-flex items-center gap-2 rounded-2xl border border-border px-8 py-4 font-medium text-foreground transition-[background-color,transform] duration-150 hover:bg-accent active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Contact Me
               </Link>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-2xl border border-signal/40 bg-signal/10 px-8 py-4 font-medium text-signal transition-[background-color,transform] duration-150 hover:bg-signal/15 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Download CV <Download className="h-4 w-4" />
+              </a>
             </motion.div>
           </div>
 
@@ -128,7 +140,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.35, ease: [0.23, 1, 0.32, 1] }}
-            className="overflow-hidden rounded-3xl border border-border bg-card shadow-lg shadow-black/10"
+            className="overflow-hidden rounded-3xl border border-border bg-card shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_24px_60px_-24px_rgba(15,23,42,0.35)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_24px_60px_-24px_rgba(0,0,0,0.65)]"
           >
             <div aria-hidden className="flex items-center gap-1.5 border-b border-border px-5 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
@@ -166,28 +178,6 @@ export default function Home() {
 
 
       <SkillsSection />
-      <section className="px-4 pb-24">
-        <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, delay: 0.8 }}
-            className="flex flex-wrap gap-4"
-          >
-        <div className="max-w-4xl mx-auto w-full"> {/* This keeps it aligned with the text above */}
-          <div className="flex flex-col sm:flex-row items-start gap-3 mt-4">
-            <Button
-              variant="secondary"
-              className="w-full sm:w-auto bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] hover:cursor-pointer text-black font-semibold"
-              asChild
-            >
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                Download CV
-              </a>
-            </Button>
-          </div>
-        </div>
-        </motion.div>
-      </section>
     </main>
   )
 }

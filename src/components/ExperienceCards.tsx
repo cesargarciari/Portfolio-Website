@@ -53,19 +53,6 @@ const experiences: ExperienceItem[] = [
 ]
 
 export function ScrollTimeline() {
-  const getTypeColor = (type: ExperienceItem["type"]) => {
-    switch (type) {
-      case "Work":
-        return "bg-blue-700"
-      case "Education":
-        return "bg-blue-800"
-      case "Internship":
-        return "bg-blue-900"
-      default:
-        return "bg-blue-300"
-    }
-  }
-
   const getTypeIcon = (type: ExperienceItem["type"]) => {
     switch (type) {
       case "Work":
@@ -83,30 +70,32 @@ export function ScrollTimeline() {
     <div className="min-h-screen bg-background py-20 safe-bottom">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-foreground mb-4">My Experience</h1>
+          <p className="eyebrow mb-3">Timeline</p>
+          <h1 className="mb-4">My Experience</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A summary of my professional experience
           </p>
         </div>
 
         <div className="relative max-w-4xl mx-auto space-y-12">
+          <div
+            aria-hidden
+            className="absolute left-8 top-8 bottom-8 hidden w-px -translate-x-1/2 bg-linear-to-b from-border via-border to-transparent sm:block"
+          />
+
           {experiences.map((experience) => (
             <div key={experience.id} className="relative flex items-start">
-              <div className="relative z-10 flex-shrink-0">
-                <div
-                  className={`w-16 h-16 rounded-full ${getTypeColor(
-                    experience.type
-                  )} flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/30 border-4 border-border ring-2 ring-border`}
-                >
+              <div className="relative z-10 hidden shrink-0 sm:block">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full border border-signal/30 bg-card text-xl text-signal ring-4 ring-background">
                   {getTypeIcon(experience.type)}
                 </div>
               </div>
 
-              <div className="ml-8 flex-1">
-                <Card className="shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 border border-border bg-card/90 backdrop-blur-sm">
+              <div className="flex-1 sm:ml-8">
+                <Card className="hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-[0_16px_40px_-20px_rgba(15,23,42,0.4)] dark:hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.7)]">
                   <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <CardTitle className="text-xl font-bold text-card-foreground">
+                      <CardTitle className="text-xl font-bold tracking-tight text-card-foreground">
                         {experience.title}
                       </CardTitle>
                       <Badge
@@ -116,7 +105,7 @@ export function ScrollTimeline() {
                         {experience.type}
                       </Badge>
                     </div>
-                    <CardDescription className="text-lg font-semibold text-cyan-400">
+                    <CardDescription className="text-lg font-semibold text-foreground">
                       {experience.company}
                     </CardDescription>
                     <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
@@ -131,7 +120,7 @@ export function ScrollTimeline() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                    <p className="text-muted-foreground mb-4 max-w-prose leading-relaxed">
                       {experience.description}
                     </p>
                     <div className="flex flex-wrap gap-2">

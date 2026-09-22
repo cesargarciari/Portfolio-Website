@@ -71,7 +71,7 @@ const skillCategories: SkillCategory[] = [
 
 export default function SkillsSection() {
   return (
-    <section className="py-16 px-4">
+    <section className="bg-surface-2 border-t border-border/60 py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,6 +80,7 @@ export default function SkillsSection() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
+          <p className="eyebrow mb-3">Toolbox</p>
           <h2 className="mb-3">Skills &amp; Technologies</h2>
           <p className="text-muted-foreground text-lg">
             Technologies I work with
@@ -95,14 +96,14 @@ export default function SkillsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             >
-              <h3 className="text-muted-foreground mb-4 text-lg font-semibold sm:text-xl">
+              <h3 className="eyebrow mb-4">
                 {category.name}
               </h3>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill, skillIndex) => {
-                  const iconUrl = 
-                    skill.key === "claude" ? "https://claude.ai/favicon.ico" : 
-                    skill.key === "greptile" ? "https://www.greptile.com/favicon.ico" : 
+                  const iconUrl =
+                    skill.key === "claude" ? "https://claude.ai/favicon.ico" :
+                    skill.key === "greptile" ? "https://www.greptile.com/favicon.ico" :
                     `https://skillicons.dev/icons?i=${skill.key}`;
 
                   return (
@@ -111,26 +112,23 @@ export default function SkillsSection() {
                       href={skill.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.8 }}
+                      initial={{ opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{
                         duration: 0.3,
-                        delay: categoryIndex * 0.1 + skillIndex * 0.04,
+                        delay: categoryIndex * 0.1 + skillIndex * 0.03,
                       }}
-                      whileHover={{ 
-                        scale: 1.15, 
-                        y: -4,
-                        transition: { duration: 0.2, delay: 0.1 }
-                      }}
-                      className="block"
+                      whileHover={{ y: -3, transition: { type: "spring", duration: 0.3, bounce: 0 } }}
+                      whileTap={{ scale: 0.94 }}
+                      className="group flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card outline-none transition-[border-color,box-shadow] duration-150 hover:border-foreground/20 hover:shadow-[0_8px_20px_-12px_rgba(15,23,42,0.3)] focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-2 dark:hover:shadow-[0_8px_20px_-12px_rgba(0,0,0,0.6)]"
                       title={skill.label}
                       aria-label={skill.label}
                     >
                       <img
                         src={iconUrl}
-                        alt={skill.label}
-                        className="h-12 w-12 object-contain rounded-lg" 
+                        alt=""
+                        className="h-7 w-7 object-contain"
                       />
                     </motion.a>
                   );

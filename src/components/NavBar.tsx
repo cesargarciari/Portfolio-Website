@@ -4,13 +4,13 @@ import { motion } from "motion/react";
 import { ModeToggle } from "./mode-toggle";
 
 const iconBase =
-  "relative h-6 w-6 text-foreground transition-opacity opacity-80 group-hover:opacity-100 group-focus:opacity-100";
+  "relative h-5 w-5 text-foreground transition-opacity opacity-80 group-hover:opacity-100 group-focus:opacity-100";
 
 const itemBase =
-  "group relative inline-flex items-center justify-center h-12 w-12 rounded-xl transition-colors duration-150 hover:bg-accent/40 focus:bg-accent/40 outline-none";
+  "group relative inline-flex items-center justify-center h-12 w-12 rounded-xl transition-[background-color,transform] duration-150 hover:bg-accent/40 focus:bg-accent/40 active:scale-90 outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
-// Apple-style spring: lively without overshooting into a bounce that fights the click.
-const PILL_SPRING = { type: "spring", duration: 0.5, bounce: 0.2 } as const;
+// Click-triggered layout shift, not a gesture with momentum — critically damped, no overshoot.
+const PILL_SPRING = { type: "spring", duration: 0.4, bounce: 0 } as const;
 
 const handleHomeClick = (e: { preventDefault: () => void }) => {
   if (location.pathname === "/") {
@@ -84,8 +84,8 @@ export default function NavBar() {
           rounded-3xl border border-border
           bg-[color:var(--glass)]
           px-4 py-2
-          shadow-lg shadow-black/10
-          backdrop-blur
+          shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_-16px_rgba(0,0,0,0.35)]
+          backdrop-blur-xl backdrop-saturate-150
           md:gap-6 md:px-6
         "
       >
@@ -108,7 +108,9 @@ export default function NavBar() {
             inline-flex items-center gap-2
             rounded-2xl bg-secondary px-5 py-2
             text-secondary-foreground hover:bg-accent
-            transition-colors duration-150 border border-border
+            transition-[background-color,transform] duration-150 active:scale-95
+            border border-border outline-none
+            focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background
           "
           aria-label="Contact"
         >

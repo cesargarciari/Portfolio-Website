@@ -7,7 +7,7 @@ const NotFound = () => {
       <div className="max-w-2xl mx-auto text-center">
         <div className="mb-8">
           <h1 className="text-8xl md:text-9xl font-bold text-foreground mb-4">404</h1>
-          <div className="w-24 h-1 bg-blue-500 mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-signal mx-auto mb-8"></div>
         </div>
 
         <div className="mb-8">
@@ -25,7 +25,7 @@ const NotFound = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/"
-            className="inline-flex items-center justify-center px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-lg text-lg font-medium"
+            className="inline-flex items-center justify-center px-6 py-3 text-primary-foreground bg-primary hover:bg-primary/90 active:scale-[0.97] transition-[background-color,transform] rounded-xl text-lg font-medium"
           >
             <FaHome className="w-4 h-4 mr-2" />
             Go Home
@@ -33,7 +33,7 @@ const NotFound = () => {
 
           <button
             onClick={() => window.history.back()}
-            className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground hover:bg-accent rounded-lg text-lg font-medium"
+            className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground hover:bg-accent active:scale-[0.97] transition-[background-color,transform] rounded-xl text-lg font-medium"
           >
             <FaArrowLeft className="w-4 h-4 mr-2" />
             Go Back

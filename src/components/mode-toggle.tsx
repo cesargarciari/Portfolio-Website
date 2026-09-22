@@ -27,7 +27,9 @@ export function ModeToggle() {
                 backdrop-blur
                 hover:bg-accent/40
                 hover:text-foreground
-                focus-visible:ring-0
+                active:scale-90
+                transition-transform
+                focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background
             "
             >
             <SunIcon className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
