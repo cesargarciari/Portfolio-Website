@@ -1,204 +1,31 @@
-import { motion } from "motion/react"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Github, ExternalLink, Calendar, ArrowRight } from "lucide-react"
+import WorkIndex from "@/components/sections/WorkIndex"
+import { projects } from "@/data/projects"
+import { useHashScroll } from "@/hooks/useScrollTo"
+import { stagger } from "@/lib/motion"
+import { numberWord } from "@/lib/search"
 
-interface Project {
-  id: string
-  name: string
-  tagline: string
-  description: string
-  stack: string[]
-  date: string
-  github?: string
-  live?: string
-}
-
-const projects: Project[] = [
-  {
-    id: "chipy",
-    name: "Chipy",
-    tagline: "Full-stack NBA career simulator with deterministic, seeded-RNG engine running client and server side.",
-    description:
-      "Build a player from high school through college, draft, and 15+ pro seasons of contracts, trades, playoffs, and legacy stats. Pure TypeScript engine (seeded RNG) runs client-side for instant offline play and server-side as source of truth on career save/share. Ships as serverless AWS stack (S3/CloudFront, Lambda, DynamoDB), Terraform-provisioned, GitHub Actions deploy. Monorepo, one shared zod-validated API contract between client and server.",
-    stack: ["TypeScript", "AWS", "Terraform", "Lambda", "DynamoDB", "CloudFront", "Zod", "GitHub Actions"],
-    date: "Aug 2026 - Present",
-    live: "https://chipy.cesargarciar.dev",
-  },
-  {
-    id: "braindump",
-    name: "BrainDump",
-    tagline: "A cognitive relief tool designed to reduce overwhelm by narrowing focus to 3–4 tasks using AI-driven triage.",
-    description:
-      "An AI-powered cognitive relief tool that helps users cut through mental noise. Paste your overwhelming task list and let GPT-4o triage it down to 3–4 actionable priorities. Features drag-and-drop reordering, AI voice readback via OpenAI TTS, and persistent task state backed by Supabase.",
-    stack: ["Next.js", "TypeScript", "Supabase", "OpenAI", "Tailwind CSS", "shadcn/ui", "@dnd-kit"],
-    date: "March 2026",
-    github: "https://github.com/ZeengFong/CursorHackathon/",
-    live: "https://braindump.lucasuanez.codes",
-  },
-  {
-    id: "job-tracker",
-    name: "Job Tracker",
-    tagline: "A full-stack job application tracker with secure authentication and per-user data isolation.",
-    description:
-      "A full-stack job application tracker that lets users create, manage, and update their job applications with secure authentication and per-user data isolation. Built with a modern Next.js App Router architecture, using API routes as the server boundary and a clean shadcn/ui interface. Features authenticated CRUD, authorization enforced at the API layer, Prisma + Supabase Postgres integration, and a clean list view with per-application detail and editable status.",
-    stack: ["Next.js", "TypeScript", "Prisma", "Supabase", "shadcn/ui"],
-    date: "January 2026",
-    github: "https://github.com/cesargarciari/job-tracker",
-  },
-  {
-    id: "unify",
-    name: "Unify – Campus Event Platform",
-    tagline: "A campus event management platform centralizing event discovery, RSVPs, and reminders for students.",
-    description:
-      "A full-stack campus event management platform built as a SENG 513 group project. Unify centralizes event communication by allowing organizers to create events and students to discover activities, RSVP, and receive reminders in one system. Features event discovery with search, filters, and category tags, a real-time RSVP system with capacity tracking, role-based access for students, organizers, admins, and guests, and a REST API built with FastAPI connected to a PostgreSQL database.",
-    stack: ["Next.js", "FastAPI", "PostgreSQL"],
-    date: "Sept–Dec 2025",
-    github: "https://github.com/cesargarciari/Unify",
-  },
-  {
-    id: "portfolio",
-    name: "Portfolio Website",
-    tagline: "A responsive, minimalistic portfolio built from scratch to showcase projects, skills, and experience.",
-    description:
-      "A responsive, minimalistic web portfolio designed to showcase my software development projects, skills, and experience. The site focuses on performance, accessibility, and clean design. It includes minimalist animations, organized project cards, and a dynamic layout optimized for all devices. Developed from scratch using modern frontend tools with fully responsive, reusable, scalable components in TypeScript.",
-    stack: ["Vite", "React", "TypeScript", "Tailwind CSS"],
-    date: "April–May 2025",
-    github: "https://github.com/cesargarciari/PortfolioWebsite",
-  },
-  {
-    id: "nba-mvp",
-    name: "NBA MVP Ranking Model",
-    tagline: "A machine learning predictor that ranks NBA MVP candidates based on historical player statistics.",
-    description:
-      "A machine learning-based predictor that determines the Most Valuable Player (MVP) for the NBA based on historical player statistics and performance metrics. Predicts MVP candidates using multiple ML models (Regression and Random Forest), supports classification and ranking of players, and includes data preprocessing, feature engineering, and model evaluation.",
-    stack: ["Python", "Pandas", "Scikit-Learn"],
-    date: "March–April 2025",
-    github: "https://github.com/cesargarciari/NBA-MVP-Predictor",
-  },
-  {
-    id: "ratemydino",
-    name: "RateMyDino",
-    tagline: "A web app helping University of Calgary students quickly understand professor reviews via AI summaries.",
-    description:
-      "A full-stack web application built to help University of Calgary students quickly understand professor reviews using AI-generated summaries from RateMyProfessor data. Features a Python backend with prompt engineering for OpenAI API integration, a SQL database with a layered MVC architecture, and a React (Next.js) frontend with dynamic professor pages.",
-    stack: ["Python", "Next.js", "OpenAI API"],
-    date: "January–March 2025",
-    live: "https://ratemydino.vercel.app/",
-  },
-  {
-    id: "movie-theatre",
-    name: "Movie Theatre Reservation App",
-    tagline: "A Java desktop application with a GUI for managing movie theatre reservations backed by a SQL database.",
-    description:
-      "A Java-based desktop application with a graphical user interface for managing a movie theatre reservation system. Designed to reinforce Object-Oriented Programming principles. Features a Java-built GUI, add/update/search/delete reservation operations, OOP principles including encapsulation, inheritance, and polymorphism, and a SQL database connection for persistent storage.",
-    stack: ["Java", "mysql-connector", "MySQL"],
-    date: "October–November 2024",
-    github: "https://github.com/cesargarciari/Movie-Management-System",
-  },
-]
+const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
 
 export default function Projects() {
+  useHashScroll()
+
+  const oldest = projects[projects.length - 1]
+
   return (
-    <main className="min-h-screen bg-background py-20 safe-bottom">
-      <div className="container mx-auto px-4 max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <p className="eyebrow mb-3">Selected Work</p>
-          <h1 className="mb-4">Projects</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A collection of things I've built
-          </p>
-        </motion.div>
+    <main id="main">
+      <section className="wrap pb-section pt-[10svh]">
+        <h1 className="t-title-1 enter max-w-[15ch]" style={stagger(0)}>
+          Everything I’ve built so far.
+        </h1>
+        <p className="t-lead enter mt-6 max-w-[44ch] text-ink-65" style={stagger(1)}>
+          {capitalize(numberWord(projects.length))} projects, from a Java desktop app in {oldest.year} to a serverless
+          NBA career simulator I’m building now.
+        </p>
+      </section>
 
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              whileHover={{ y: -4, transition: { type: "spring", duration: 0.35, bounce: 0 } }}
-              className="h-full"
-            >
-              <Card className="h-full flex flex-col hover:border-foreground/15 hover:shadow-[0_20px_48px_-24px_rgba(15,23,42,0.4)] dark:hover:shadow-[0_20px_48px_-24px_rgba(0,0,0,0.75)]">
-                <CardHeader>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-xs text-muted-foreground">
-                      ~/{project.id}
-                    </span>
-                    {project.live && (
-                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-signal">
-                        <span className="h-1.5 w-1.5 rounded-full bg-signal" />
-                        Live
-                      </span>
-                    )}
-                  </div>
-                  <CardTitle className="text-2xl font-bold tracking-tight text-card-foreground">
-                    {project.name}
-                  </CardTitle>
-                  <CardDescription className="text-sm font-medium text-foreground/75">
-                    {project.tagline}
-                  </CardDescription>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {project.date}
-                  </div>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-4 flex-1">
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="secondary"
-                        className="text-xs bg-secondary text-secondary-foreground hover:bg-accent"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {(project.github || project.live) && (
-                    <div className="mt-auto flex items-center gap-5 border-t border-border pt-4">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
-                        >
-                          <Github className="h-4 w-4" />
-                          Code
-                        </a>
-                      )}
-                      {project.live && (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          Visit
-                          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5" />
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+      <section aria-label="Projects" className="wrap pb-section-lg">
+        <WorkIndex projects={projects} />
+      </section>
     </main>
   )
 }
