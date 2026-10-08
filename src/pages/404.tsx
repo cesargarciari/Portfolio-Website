@@ -1,46 +1,28 @@
 import { Link } from "react-router-dom"
-import { FaArrowLeft, FaHome } from "react-icons/fa";
+import { pill } from "@/components/ui/pill"
+import { stagger } from "@/lib/motion"
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4 safe-bottom">
-      <div className="max-w-2xl mx-auto text-center">
-        <div className="mb-8">
-          <h1 className="text-8xl md:text-9xl font-bold text-foreground mb-4">404</h1>
-          <div className="w-24 h-1 bg-signal mx-auto mb-8"></div>
-        </div>
-
-        <div className="mb-8">
-          <div className="w-64 h-64 mx-auto rounded-lg flex items-center justify-center overflow-hidden">
-            <img src="/404.gif" alt="404 GIF" className="object-contain w-full h-full" />
-          </div>
-        </div>
-
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Page Not Found</h2>
-          <p className="text-lg text-muted-foreground mb-2">Sorry, we couldn't find the page.</p>
-          <p className="text-muted-foreground">The page might have been deleted or you entered the wrong URL.</p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center px-6 py-3 text-primary-foreground bg-primary hover:bg-primary/90 active:scale-[0.97] transition-[background-color,transform] rounded-xl text-lg font-medium"
-          >
-            <FaHome className="w-4 h-4 mr-2" />
-            Go Home
-          </Link>
-
-          <button
-            onClick={() => window.history.back()}
-            className="inline-flex items-center justify-center px-6 py-3 border border-border text-foreground hover:bg-accent active:scale-[0.97] transition-[background-color,transform] rounded-xl text-lg font-medium"
-          >
-            <FaArrowLeft className="w-4 h-4 mr-2" />
-            Go Back
-          </button>
-        </div>
+    <main id="main" className="wrap flex min-h-[80svh] flex-col items-center justify-center pb-section text-center">
+      <h1 className="t-title-1 enter max-w-[14ch]" style={stagger(0)}>
+        This page wandered off.
+      </h1>
+      <p className="t-lead enter mt-6 max-w-[34ch] text-balance text-ink-65" style={stagger(1)}>
+        The link may be old, or the address has a typo.
+      </p>
+      <div className="enter mt-10 size-56 overflow-hidden rounded-4xl bg-raised" style={stagger(2)}>
+        <img src="/404.gif" alt="" className="size-full object-cover" />
       </div>
-    </div>
+      <div className="enter mt-10 flex flex-wrap justify-center gap-2" style={stagger(3)}>
+        <Link to="/" className={pill({ variant: "primary" })}>
+          Go to the home page
+        </Link>
+        <button type="button" onClick={() => window.history.back()} className={pill({ variant: "secondary" })}>
+          Go back
+        </button>
+      </div>
+    </main>
   )
 }
 
