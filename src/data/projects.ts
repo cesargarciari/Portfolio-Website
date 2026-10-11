@@ -47,17 +47,6 @@ export const projects: Project[] = [
     live: "https://braindump.lucasuanez.codes",
   },
   {
-    id: "job-tracker",
-    name: "Job tracker",
-    tagline: "A full-stack job application tracker with secure authentication and per-user data isolation.",
-    description:
-      "A full-stack job application tracker that lets users create, manage, and update their job applications with secure authentication and per-user data isolation. Built with a modern Next.js App Router architecture, using API routes as the server boundary and a clean shadcn/ui interface. Features authenticated CRUD, authorization enforced at the API layer, Prisma + Supabase Postgres integration, and a clean list view with per-application detail and editable status.",
-    stack: ["Next.js", "TypeScript", "Prisma", "Supabase", "shadcn/ui"],
-    date: "Jan 2026",
-    year: 2026,
-    github: "https://github.com/cesargarciari/job-tracker",
-  },
-  {
     id: "unify",
     name: "Unify",
     tagline: "A campus event management platform centralizing event discovery, RSVPs, and reminders for students.",
@@ -102,17 +91,6 @@ export const projects: Project[] = [
     date: "Jan – Mar 2025",
     year: 2025,
     live: "https://ratemydino.vercel.app/",
-  },
-  {
-    id: "movie-theatre",
-    name: "Movie theatre reservations",
-    tagline: "A Java desktop application with a GUI for managing movie theatre reservations backed by a SQL database.",
-    description:
-      "A Java-based desktop application with a graphical user interface for managing a movie theatre reservation system. Designed to reinforce Object-Oriented Programming principles. Features a Java-built GUI, add/update/search/delete reservation operations, OOP principles including encapsulation, inheritance, and polymorphism, and a SQL database connection for persistent storage.",
-    stack: ["Java", "mysql-connector", "MySQL"],
-    date: "Oct – Nov 2024",
-    year: 2024,
-    github: "https://github.com/cesargarciari/Movie-Management-System",
   },
 ]
 
