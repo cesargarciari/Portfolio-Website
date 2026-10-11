@@ -1,3 +1,6 @@
+/** App icons shown by ProjectMark; only projects with a case study have one so far. */
+export type ProjectIcon = "chipy"
+
 export interface Project {
   id: string
   name: string
@@ -10,6 +13,9 @@ export interface Project {
   featured?: boolean
   github?: string
   live?: string
+  /** Has a full case study at /projects/:id (see src/data/case-studies). */
+  caseStudy?: boolean
+  icon?: ProjectIcon
 }
 
 export const projects: Project[] = [
@@ -18,12 +24,14 @@ export const projects: Project[] = [
     name: "Chipy",
     tagline: "Full-stack NBA career simulator with deterministic, seeded-RNG engine running client and server side.",
     description:
-      "Build a player from high school through college, draft, and 15+ pro seasons of contracts, trades, playoffs, and legacy stats. Pure TypeScript engine (seeded RNG) runs client-side for instant offline play and server-side as source of truth on career save/share. Ships as serverless AWS stack (S3/CloudFront, Lambda, DynamoDB), Terraform-provisioned, GitHub Actions deploy. Monorepo, one shared zod-validated API contract between client and server.",
+      "Pure TypeScript engine (seeded RNG) runs client-side for instant offline play and server-side as source of truth on career save/share. Ships as serverless AWS stack (S3/CloudFront, Lambda, DynamoDB), Terraform-provisioned, GitHub Actions deploy. Monorepo, one shared zod-validated API contract between client and server.",
     stack: ["TypeScript", "AWS", "Terraform", "Lambda", "DynamoDB", "CloudFront", "Zod", "GitHub Actions"],
     date: "Aug 2026 – now",
     year: 2026,
     featured: true,
     live: "https://chipy.cesargarciar.dev",
+    caseStudy: true,
+    icon: "chipy",
   },
   {
     id: "braindump",

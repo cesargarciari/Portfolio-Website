@@ -2,14 +2,7 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* =========================================================================
-   Brand slots
-   Light is flag white with Salvadoran cobalt (#0f47af). Dark is volcanic-
-   night basalt with a luminous cobalt. Sunrise gold is the signal: only the
-   sun over the volcanoes and the "live" dots use it.
-   The mood section always wears the opposite palette, so it flips with the
-   theme: dark on a light page, light on a dark page.
-   ========================================================================= */
+
 :root,
 .dark [data-ground="mood"] {
   --brand-scheme: light;
@@ -489,6 +482,15 @@
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: var(--d-lg);
+  animation-timing-function: var(--ease-out);
+}
+
+/* A project's mark travelling from the index into its case study. It covers
+   more distance than the page crossfade, so it gets a little longer. */
+::view-transition-group(project-mark),
+::view-transition-old(project-mark),
+::view-transition-new(project-mark) {
+  animation-duration: 560ms;
   animation-timing-function: var(--ease-out);
 }
 
