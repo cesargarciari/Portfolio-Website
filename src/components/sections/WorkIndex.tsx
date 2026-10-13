@@ -1,6 +1,9 @@
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState, type MouseEvent } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { LayoutGroup, motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react"
+import ProjectMark from "@/components/ProjectMark"
 import { pill } from "@/components/ui/pill"
+import { useMorphNavigate } from "@/hooks/useMorphNavigate"
 import { useScrollTo } from "@/hooks/useScrollTo"
 import type { Project } from "@/data/projects"
 import { LAYOUT_SPRING } from "@/lib/motion"
@@ -15,21 +18,37 @@ interface ProjectEntryProps {
   onActive: (id: string) => void
 }
 
-/**
- * Each entry pulls focus as it crosses the middle of the screen and softens as
- * it leaves, like a lens following the reader. It reports itself as active
- * while it holds the centre band, which drives the sticky index.
- */
+const prefetchCaseStudy = () => void import("@/pages/CaseStudy")
+
 function ProjectEntry({ project, onActive }: ProjectEntryProps) {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
   const centred = useInView(ref, { margin: "-45% 0px -45% 0px" })
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.2, 1, 1, 0.2])
+  const markRef = useRef<HTMLSpanElement>(null)
+  const morphTo = useMorphNavigate()
+  const navigate = useNavigate()
+  const studyPath = `/projects/${project.id}`
+
+  // Modified clicks (new tab, new window) fall through to the link's real href.
+  const openStudy = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    event.preventDefault()
+    // The page is frozen on a snapshot until the route swaps, so load the chunk first.
+    import("@/pages/CaseStudy").then(
+      () => morphTo(studyPath, markRef.current),
+      () => navigate(studyPath),
+    )
+  }
 
   useEffect(() => {
     if (centred) onActive(project.id)
   }, [centred, onActive, project.id])
+
+  useEffect(() => {
+    if (centred && project.caseStudy) prefetchCaseStudy()
+  }, [centred, project.caseStudy])
 
   return (
     <motion.article
@@ -48,14 +67,28 @@ function ProjectEntry({ project, onActive }: ProjectEntryProps) {
           </span>
         )}
       </p>
-      <h3 id={`${project.id}-name`} className="t-title-2 mt-4">
-        {project.name}
-      </h3>
+      <div className="mt-4 flex items-center gap-4">
+        {project.icon && <ProjectMark ref={markRef} icon={project.icon} className="size-12 sm:size-14" />}
+        <h3 id={`${project.id}-name`} className="t-title-2">
+          {project.name}
+        </h3>
+      </div>
       <p className="t-lead mt-5 max-w-[38ch]">{project.tagline}</p>
       <p className="mt-5 max-w-[62ch] text-ink-65">{project.description}</p>
       <p className="t-small mt-6 max-w-[62ch] text-ink-45">{project.stack.join(", ")}</p>
-      {(project.live || project.github) && (
+      {(project.caseStudy || project.live || project.github) && (
         <div className="mt-8 flex flex-wrap gap-2">
+          {project.caseStudy && (
+            <Link
+              to={studyPath}
+              onClick={openStudy}
+              onPointerEnter={prefetchCaseStudy}
+              onFocus={prefetchCaseStudy}
+              className={pill({ variant: "primary" })}
+            >
+              Read the case study
+            </Link>
+          )}
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer" className={pill({ variant: "secondary" })}>
               Visit the site
@@ -77,10 +110,6 @@ function ProjectEntry({ project, onActive }: ProjectEntryProps) {
   )
 }
 
-/**
- * Projects as an editorial index. On wide screens the names stay pinned on the
- * left and a cobalt dot glides to whichever project you're reading on the right.
- */
 export default function WorkIndex({ projects }: WorkIndexProps) {
   const [activeId, setActiveId] = useState(projects[0]?.id)
   const groupId = useId()

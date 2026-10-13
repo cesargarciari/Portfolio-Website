@@ -3,11 +3,6 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import WorkSearch from "@/components/sections/WorkSearch"
 import { stagger } from "@/lib/motion"
 
-/**
- * A greeting and the instrument. As you begin to scroll, the hero recedes:
- * it drifts up a little slower than the page and fades, so the story below
- * seems to rise out from under it.
- */
 export default function Hero() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()

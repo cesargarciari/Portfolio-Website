@@ -42,7 +42,7 @@ export function ThemeProvider({ children, defaultTheme = "system", storageKey = 
 
   const resolvedTheme = theme === "system" ? system : theme
 
-  // Layout effect so a flushSync'd theme change is in the DOM before a view transition snapshots it.
+  // Layout effect so a flushSync'd theme change lands before a view transition snapshots it.
   useLayoutEffect(() => {
     const root = document.documentElement
     root.classList.remove("light", "dark")
@@ -56,7 +56,7 @@ export function ThemeProvider({ children, defaultTheme = "system", storageKey = 
       try {
         localStorage.setItem(storageKey, next)
       } catch {
-        // Storage can be unavailable (private mode); the choice still applies for this visit.
+        // Storage is unavailable in private mode; the theme still applies for this visit.
       }
       setThemeState(next)
     },

@@ -4,16 +4,13 @@ export interface Role {
   company: string
   location: string
   period: string
-  /** Short label for the journey rail on the home page. */
   year: string
   kind: "Internship" | "Capstone" | "Full time"
-  /** One line for the home page journey. */
   summary: string
   description: string
   skills: string[]
 }
 
-/** Most recent first. */
 export const roles: Role[] = [
   {
     id: "csi-capstone",

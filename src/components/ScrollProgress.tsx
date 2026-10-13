@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from "motion/react"
 
-/** A cobalt hairline along the top edge that fills as you read the page. */
 export default function ScrollProgress() {
   const { scrollYProgress } = useScroll()
   const transform = useTransform(scrollYProgress, (progress) => `scaleX(${progress})`)

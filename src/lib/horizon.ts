@@ -1,9 +1,4 @@
-/**
- * Two horizons drawn on the same 1200 x 240 canvas with the same number of
- * quadratic segments, so one can morph into the other: the volcano line of
- * El Salvador and the front range of the Rockies seen from Calgary.
- */
-
+// Both horizons use the same number of quadratic segments so one can morph into the other.
 type Point = readonly [number, number]
 
 interface Segment {
@@ -14,14 +9,10 @@ interface Segment {
 export const HORIZON_WIDTH = 1200
 export const HORIZON_HEIGHT = 240
 
-/** The band that holds every peak and the baseline, for drawing the line without the sky. */
 export const HORIZON_BAND = { top: 72, height: 136 } as const
 
 const VOLCANO_START: Point = [0, 200]
 
-// Cones with concave flanks and summits that dip slightly, the way a crater
-// rim reads from far away. Left to right, loosely: Santa Ana, Izalco,
-// San Salvador, the twin peaks of San Vicente, and San Miguel.
 const VOLCANOES: Segment[] = [
   { c: [60, 199], p: [130, 194] },
   { c: [226, 190], p: [248, 116] },
@@ -47,8 +38,6 @@ const VOLCANOES: Segment[] = [
 
 const ROCKIES_START: Point = [0, 196]
 
-// Sharp peaks and notches at the same x positions, so the morph reads as the
-// cones sharpening into a mountain wall rather than sliding sideways.
 const ROCKIES_PEAKS: Point[] = [
   [130, 178],
   [245, 110],
@@ -72,7 +61,6 @@ const ROCKIES_PEAKS: Point[] = [
   [1200, 170],
 ]
 
-/** Straight lines expressed as quadratics (control at the midpoint) so they morph cleanly. */
 function straight(start: Point, points: Point[]): Segment[] {
   let previous = start
   return points.map((point) => {
@@ -87,7 +75,6 @@ function toPath(start: Point, segments: Segment[]) {
   return `M ${start[0]} ${start[1]} ${body}`
 }
 
-/** Closes a horizon line down to the bottom edge, for the land fill. */
 export function closePath(line: string) {
   return `${line} L ${HORIZON_WIDTH} ${HORIZON_HEIGHT} L 0 ${HORIZON_HEIGHT} Z`
 }
@@ -95,7 +82,6 @@ export function closePath(line: string) {
 export const VOLCANO_PATH = toPath(VOLCANO_START, VOLCANOES)
 export const ROCKIES_PATH = toPath(ROCKIES_START, straight(ROCKIES_START, ROCKIES_PEAKS))
 
-/** Volcanoes on the left, Rockies on the right: the whole story in one line. */
 export const HOMEWARD_PATH = toPath(VOLCANO_START, [
   ...VOLCANOES.slice(0, 8),
   ...straight(VOLCANOES[7].p, ROCKIES_PEAKS.slice(8)),

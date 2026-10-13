@@ -2,14 +2,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* =========================================================================
-   Brand slots
-   Light is flag white with Salvadoran cobalt (#0f47af). Dark is volcanic-
-   night basalt with a luminous cobalt. Sunrise gold is the signal: only the
-   sun over the volcanoes and the "live" dots use it.
-   The mood section always wears the opposite palette, so it flips with the
-   theme: dark on a light page, light on a dark page.
-   ========================================================================= */
 :root,
 .dark [data-ground="mood"] {
   --brand-scheme: light;
@@ -249,7 +241,6 @@
   line-height: 1.5;
   font-weight: 500;
 }
-/* The voice: a serif italic for human moments (greetings), used in very few places. */
 @utility t-voice {
   font-family: var(--font-voice);
   font-style: italic;
@@ -264,7 +255,6 @@
 
 /* ---------- Components ---------- */
 @layer components {
-  /* Pills: three variants and nothing else. Primary is the cobalt "special" button. */
   .pill {
     display: inline-flex;
     align-items: center;
@@ -321,7 +311,6 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    /* Toward the ink: darker cobalt on light, brighter cobalt on dark. */
     .pill-primary:hover {
       background: color-mix(in srgb, var(--deep) 86%, var(--ink));
     }
@@ -333,7 +322,6 @@
     }
   }
 
-  /* The instrument: one rounded field that earns the page's main shadow. */
   .composer {
     display: flex;
     align-items: center;
@@ -371,7 +359,6 @@
     appearance: none;
   }
 
-  /* The dock: navigation that steps aside while you read and returns when you scroll back. */
   .dock {
     position: fixed;
     left: 50%;
@@ -427,7 +414,6 @@
     }
   }
 
-  /* Rebus glyphs: small two-tone drawings that sit inside a sentence. */
   .glyph {
     display: inline-grid;
     place-items: center;
@@ -453,7 +439,6 @@
     }
   }
 
-  /* The one orchestrated entrance per view: rise a few pixels and pull focus. */
   .enter {
     animation: stagger-entrance-in 900ms var(--ease-out) both;
     animation-delay: calc(var(--i, 0) * 90ms);
@@ -476,6 +461,27 @@
   }
 }
 
+@keyframes stagger-entrance-sharp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Safari draws stray edge lines on blurred layers inside a view transition. */
+@media (prefers-reduced-motion: no-preference) {
+  .enter-sharp .enter {
+    animation-name: stagger-entrance-sharp;
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -485,14 +491,19 @@
   }
 }
 
-/* Theme switch: a calm crossfade of the whole page. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: var(--d-lg);
   animation-timing-function: var(--ease-out);
 }
 
-/* Reduced motion keeps the fades that aid comprehension and drops movement. */
+::view-transition-group(project-mark),
+::view-transition-old(project-mark),
+::view-transition-new(project-mark) {
+  animation-duration: 560ms;
+  animation-timing-function: var(--ease-out);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .enter {
     animation: fade-in 200ms ease both;
@@ -504,7 +515,6 @@
   .dock {
     transition: opacity var(--d-md) ease;
   }
-  /* The dock stays put: hiding it would be movement for its own sake. */
   .dock[data-hidden="true"]:not(:focus-within) {
     translate: -50% 0;
     opacity: 1;

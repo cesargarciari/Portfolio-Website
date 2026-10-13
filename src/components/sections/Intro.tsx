@@ -2,7 +2,6 @@ import { Fragment, useRef } from "react"
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react"
 import Glyph, { type GlyphName } from "@/components/sections/Glyph"
 
-/** `{glyph:word}` places a drawing before its word. */
 const SENTENCE =
   "I grew up among the {volcano:volcanoes} of El Salvador and studied software engineering under the {mountain:Rockies} in Calgary. I like to build full-stack web apps and cloud services, from the {database:database} to the last {cursor:pixel} ."
 
@@ -16,7 +15,6 @@ const TOKENS: Token[] = SENTENCE.split(" ").map((part) => {
   return match ? { glyph: match[1] as GlyphName, word: match[2] } : { word: part }
 })
 
-/** Unread words wait at low ink; each one comes up to full ink as the reader scrolls to it. */
 const RESTING_OPACITY = 0.16
 
 interface WordProps {
@@ -35,10 +33,6 @@ function Word({ token, progress, range }: WordProps) {
   )
 }
 
-/**
- * A rebus sentence that reads itself in as you scroll: the scroll position is
- * the reading position, so the motion is the reading.
- */
 export default function Intro() {
   const ref = useRef<HTMLParagraphElement>(null)
   const reduce = useReducedMotion()

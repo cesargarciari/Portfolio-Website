@@ -16,7 +16,6 @@ const stroke = {
 
 const accent = { ...stroke, stroke: "var(--deep)" }
 
-/** Two-tone inline drawings for the rebus sentence: ink plus one touch of cobalt or sunrise. */
 const DRAWINGS: Record<GlyphName, ReactNode> = {
   volcano: (
     <>

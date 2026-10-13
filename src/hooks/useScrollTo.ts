@@ -2,10 +2,8 @@ import { useCallback, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { useLenis } from "lenis/react"
 
-/** Space left above a scrolled-to element so it doesn't sit flush against the top edge. */
 const TOP_OFFSET = -96
 
-/** Glide to an element by id (or to the top) through Lenis, with a native fallback. */
 export function useScrollTo() {
   const lenis = useLenis()
 
@@ -25,7 +23,6 @@ export function useScrollTo() {
   )
 }
 
-/** On pages with deep links (/projects#chipy), glide to the target once the page has mounted. */
 export function useHashScroll() {
   const { hash } = useLocation()
   const scrollTo = useScrollTo()

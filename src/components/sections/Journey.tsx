@@ -16,10 +16,8 @@ import { HORIZON_HEIGHT, HORIZON_WIDTH, ROCKIES_PATH, VOLCANO_PATH, closePath } 
 import { DURATION, EASE_OUT } from "@/lib/motion"
 import { cn } from "@/lib/utils"
 
-/** The home page tells it in order: El Salvador first. */
 const STOPS = [...roles].reverse()
 
-/** The stretch of the scene where the volcano line sharpens into the Rockies. */
 const MORPH_RANGE = [0.42, 0.72]
 
 const journeyTitle = "From El Salvador to Calgary."
@@ -51,11 +49,6 @@ function StopDetail({ stop }: StopProps) {
   )
 }
 
-/**
- * A pinned scene, about three screens of scroll long. Scrolling is travel:
- * the sun rises from behind the volcanoes, the horizon sharpens into the
- * Rockies, and the stops advance along a cobalt rail.
- */
 function JourneyScene() {
   const ref = useRef<HTMLElement>(null)
   const [active, setActive] = useState(0)
@@ -68,7 +61,7 @@ function JourneyScene() {
 
   const line = useTransform(scrollYProgress, MORPH_RANGE, [VOLCANO_PATH, ROCKIES_PATH])
   const land = useTransform(scrollYProgress, MORPH_RANGE, [closePath(VOLCANO_PATH), closePath(ROCKIES_PATH)])
-  // Kept inside the middle of the canvas so the sun stays in frame when phones crop the sides.
+  // Kept near the middle so the sun stays in frame when phones crop the sides.
   const sunX = useTransform(scrollYProgress, [0, 1], [340, 860])
   const sunY = useTransform(scrollYProgress, [0, 0.25, 1], [236, 58, 42])
   const sun = useMotionTemplate`translate(${sunX}px, ${sunY}px)`
@@ -90,7 +83,6 @@ function JourneyScene() {
           className="mt-auto block h-[clamp(150px,20vw,300px)] w-full"
         >
           <defs>
-            {/* A faint silhouette, so the line reads as land rather than a chart, fading into the page. */}
             <linearGradient id="journey-land" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" style={{ stopColor: "var(--ground-raised)" }} />
               <stop offset="1" style={{ stopColor: "var(--ground)" }} />
@@ -157,7 +149,6 @@ function JourneyScene() {
   )
 }
 
-/** Reduced motion: the same story laid out flat, with nothing pinned or scrubbed. */
 function JourneyStatic() {
   return (
     <section aria-labelledby="journey-title" className="py-section-lg">

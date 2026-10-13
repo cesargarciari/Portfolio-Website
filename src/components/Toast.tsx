@@ -6,12 +6,8 @@ interface ToastProps {
   message: string | null
 }
 
-/**
- * A small ink pill at the top of the screen. Motion transitions (not keyframes)
- * so a second copy in quick succession retargets instead of restarting.
- * Portaled to <body> so no ancestor's filter or transform can trap it.
- */
 export default function Toast({ message }: ToastProps) {
+  // Portaled so no ancestor's transform or filter can trap the fixed position.
   return createPortal(
     <div aria-live="polite" className="pointer-events-none fixed inset-x-0 top-5 z-50 flex justify-center px-4">
       <AnimatePresence>

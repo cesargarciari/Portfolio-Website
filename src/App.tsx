@@ -1,4 +1,5 @@
-import { Route, Routes, useLocation } from "react-router-dom"
+import { lazy, Suspense, useState } from "react"
+import { Route, Routes, useLocation, useNavigationType } from "react-router-dom"
 import { AnimatePresence, MotionConfig } from "motion/react"
 import { useLenis } from "lenis/react"
 import Header from "./components/Header"
@@ -13,13 +14,41 @@ import Projects from "./pages/Projects"
 import Experience from "./pages/Experience"
 import Contact from "./pages/Contact"
 import NotFound from "./pages/404"
+import { isMorphState } from "./lib/viewTransition"
+
+const CHUNK_RELOAD_KEY = "case-study-chunk-reload"
+
+// After a deploy, a tab opened earlier requests a chunk that no longer exists: reload once.
+const CaseStudy = lazy(() =>
+  import("./pages/CaseStudy").then(
+    (module) => {
+      sessionStorage.removeItem(CHUNK_RELOAD_KEY)
+      return module
+    },
+    (error: unknown) => {
+      if (sessionStorage.getItem(CHUNK_RELOAD_KEY)) throw error
+      sessionStorage.setItem(CHUNK_RELOAD_KEY, "1")
+      window.location.reload()
+      return new Promise<never>(() => {})
+    },
+  ),
+)
 
 function Shell() {
   const location = useLocation()
   const lenis = useLenis()
+  const navigationType = useNavigationType()
 
-  // Jump to the top while the old page is already invisible, and through Lenis
-  // so its internal scroll position doesn't glide back to where it was.
+  // Inside <Routes location> the navigation type is always POP, so a stale morph flag is cleared here.
+  const morphPush = navigationType === "PUSH" && isMorphState(location.state)
+  const routeLocation = isMorphState(location.state) && !morphPush ? { ...location, state: null } : location
+
+  // A counter, not location.key: returning to a morph's origin reuses its key and would skip the crossfade.
+  const [route, setRoute] = useState({ key: 0, path: location.pathname })
+  if (route.path !== location.pathname) {
+    setRoute({ key: morphPush ? route.key : route.key + 1, path: location.pathname })
+  }
+
   const resetScroll = () => {
     if (lenis) lenis.scrollTo(0, { immediate: true, force: true })
     else window.scrollTo(0, 0)
@@ -35,12 +64,20 @@ function Shell() {
       </a>
       <ScrollProgress />
       <Header />
-      {/* mode="wait" fully unmounts the old page before the new one mounts,
-          so two pages of very different heights are never on screen at once. */}
       <AnimatePresence mode="wait" onExitComplete={resetScroll}>
-        <Routes location={location} key={location.pathname}>
+        <Routes location={routeLocation} key={route.key}>
           <Route path="/" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+          <Route
+            path="/projects/:slug"
+            element={
+              <PageTransition>
+                <Suspense fallback={null}>
+                  <CaseStudy />
+                </Suspense>
+              </PageTransition>
+            }
+          />
           <Route path="/experience" element={<PageTransition><Experience /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />

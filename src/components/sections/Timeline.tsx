@@ -10,7 +10,6 @@ interface TimelineEntryProps {
   role: Role
 }
 
-/** Where the drawing line's tip sits on screen; nodes fill as the tip reaches them. */
 const TIP = "62%"
 
 function TimelineEntry({ role }: TimelineEntryProps) {
@@ -42,7 +41,6 @@ function TimelineEntry({ role }: TimelineEntryProps) {
   )
 }
 
-/** A hairline that draws itself in cobalt as you read down the roles. */
 export default function Timeline({ roles }: TimelineProps) {
   const ref = useRef<HTMLOListElement>(null)
   const reduce = useReducedMotion()
