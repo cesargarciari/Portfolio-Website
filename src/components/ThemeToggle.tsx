@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils"
 const iconBase =
   "absolute size-[18px] transition-[opacity,scale] duration-[180ms] ease-out motion-reduce:transition-opacity"
 
-/** Switches between the basalt and flag-white palettes with a calm whole-page crossfade. */
 export default function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
   const next = resolvedTheme === "dark" ? "light" : "dark"

@@ -5,7 +5,6 @@ interface HorizonProps {
   className?: string
 }
 
-/** A quiet hairline of the whole journey: Salvadoran volcanoes give way to the Rockies. */
 export default function Horizon({ className }: HorizonProps) {
   return (
     <svg

@@ -18,14 +18,8 @@ interface ProjectEntryProps {
   onActive: (id: string) => void
 }
 
-/** Starts loading the case study chunk on hover or focus, so the click doesn't wait on the network. */
 const prefetchCaseStudy = () => void import("@/pages/CaseStudy")
 
-/**
- * Each entry pulls focus as it crosses the middle of the screen and softens as
- * it leaves, like a lens following the reader. It reports itself as active
- * while it holds the centre band, which drives the sticky index.
- */
 function ProjectEntry({ project, onActive }: ProjectEntryProps) {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
@@ -37,13 +31,11 @@ function ProjectEntry({ project, onActive }: ProjectEntryProps) {
   const navigate = useNavigate()
   const studyPath = `/projects/${project.id}`
 
-  // Plain clicks morph the mark into the case study; modified clicks keep their
-  // usual meaning (new tab, new window) through the link's real href.
+  // Modified clicks (new tab, new window) fall through to the link's real href.
   const openStudy = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     event.preventDefault()
-    // The page is frozen on a snapshot while the transition waits for the new
-    // route, so load the chunk first; it's usually already prefetched.
+    // The page is frozen on a snapshot until the route swaps, so load the chunk first.
     import("@/pages/CaseStudy").then(
       () => morphTo(studyPath, markRef.current),
       () => navigate(studyPath),
@@ -54,7 +46,6 @@ function ProjectEntry({ project, onActive }: ProjectEntryProps) {
     if (centred) onActive(project.id)
   }, [centred, onActive, project.id])
 
-  // Touch has no hover, so start loading as soon as the entry is being read.
   useEffect(() => {
     if (centred && project.caseStudy) prefetchCaseStudy()
   }, [centred, project.caseStudy])
@@ -119,10 +110,6 @@ function ProjectEntry({ project, onActive }: ProjectEntryProps) {
   )
 }
 
-/**
- * Projects as an editorial index. On wide screens the names stay pinned on the
- * left and a cobalt dot glides to whichever project you're reading on the right.
- */
 export default function WorkIndex({ projects }: WorkIndexProps) {
   const [activeId, setActiveId] = useState(projects[0]?.id)
   const groupId = useId()

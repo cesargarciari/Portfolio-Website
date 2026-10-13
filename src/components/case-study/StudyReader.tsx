@@ -5,21 +5,25 @@ import type { StudySection } from "@/data/case-studies/types"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { DURATION, EASE_OUT } from "@/lib/motion"
 
-/** Tailwind's lg breakpoint, where the rail appears. */
 const WIDE = "(min-width: 64rem)"
 
 interface StudyReaderProps {
   sections: StudySection[]
 }
 
+function railSection(sections: StudySection[], index: number) {
+  for (let i = index; i >= 0; i--) {
+    if (sections[i].media) return sections[i]
+  }
+  return undefined
+}
+
 interface StudyBlockProps {
   section: StudySection
   onActive: (id: string) => void
-  /** The rail is showing the media, so the inline copy is for screen readers only. */
   wide: boolean
 }
 
-/** One section of prose. It reports itself as active while it holds the middle of the screen. */
 function StudyBlock({ section, onActive, wide }: StudyBlockProps) {
   const ref = useRef<HTMLElement>(null)
   const centred = useInView(ref, { margin: "-45% 0px -45% 0px" })
@@ -36,8 +40,6 @@ function StudyBlock({ section, onActive, wide }: StudyBlockProps) {
       className="flex scroll-mt-24 flex-col justify-center border-t border-line py-14 first:border-t-0 lg:min-h-[88svh] lg:border-t-0 lg:py-20"
     >
       {section.media && (
-        // On wide screens this copy stays in the reading order for screen readers,
-        // since the rail only ever holds the active section's media.
         <div className="mb-10 lg:sr-only">
           <MediaFrame media={section.media} variant="inline" focusable={!wide} />
         </div>
@@ -54,33 +56,29 @@ function StudyBlock({ section, onActive, wide }: StudyBlockProps) {
   )
 }
 
-/**
- * The reading half of a case study. On wide screens the media for whichever
- * section you're reading is held in a sticky rail on the left and swaps as you
- * scroll, so the picture always matches the paragraph beside it. On small
- * screens each section shows its media inline, above the text.
- */
 export default function StudyReader({ sections }: StudyReaderProps) {
   const [activeId, setActiveId] = useState(sections[0]?.id)
-  const active = sections.find((section) => section.id === activeId)
+  const shown = railSection(
+    sections,
+    sections.findIndex((section) => section.id === activeId),
+  )
   const wide = useMediaQuery(WIDE)
 
   return (
     <div className="lg:grid lg:grid-cols-12 lg:gap-x-4">
-      {/* A visual echo of the inline media, so assistive tech skips it and its boxes take no focus. */}
       <div aria-hidden className="hidden lg:col-span-6 lg:block">
         <div className="sticky top-[10svh] h-[80svh]">
           <AnimatePresence initial={false}>
-            {active?.media && (
+            {shown?.media && (
               <motion.div
-                key={active.id}
+                key={shown.id}
                 className="absolute inset-0"
                 initial={{ opacity: 0, filter: "blur(8px)", y: 12 }}
                 animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                 exit={{ opacity: 0, transition: { duration: DURATION.sm, ease: EASE_OUT } }}
                 transition={{ duration: 0.42, ease: EASE_OUT }}
               >
-                <MediaFrame media={active.media} variant="rail" focusable={false} />
+                <MediaFrame media={shown.media} variant="rail" focusable={false} />
               </motion.div>
             )}
           </AnimatePresence>

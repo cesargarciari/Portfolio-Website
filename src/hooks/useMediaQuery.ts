@@ -1,6 +1,5 @@
 import { useCallback, useSyncExternalStore } from "react"
 
-/** Whether a media query currently matches, kept in sync as the viewport changes. */
 export function useMediaQuery(query: string) {
   const subscribe = useCallback(
     (onChange: () => void) => {

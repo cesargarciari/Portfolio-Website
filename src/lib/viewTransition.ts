@@ -1,7 +1,5 @@
-/** The one shared element name: the clicked project's mark and the case study hero's mark. */
 export const MORPH_NAME = "project-mark"
 
-/** Set on the destination mark so the transition knows the new page is in the DOM. */
 export const MORPH_TARGET_ATTR = "data-morph-target"
 
 export interface MorphState {
@@ -12,14 +10,10 @@ export function isMorphState(state: unknown): state is MorphState {
   return typeof state === "object" && state !== null && (state as { morph?: unknown }).morph === true
 }
 
-/** Chrome abandons a view transition whose update takes 4s; give up well before that. */
+// Chrome abandons a view transition whose update takes 4s.
 const TARGET_TIMEOUT_MS = 1500
 
-/**
- * Resolves once the destination mark has mounted. Polls with timers, not
- * requestAnimationFrame, because frames are suppressed while a view transition
- * waits for its update callback.
- */
+// Polls with timers: requestAnimationFrame is paused while a view transition waits for its update.
 export function waitForMorphTarget(): Promise<void> {
   return new Promise((resolve) => {
     const started = performance.now()

@@ -3,22 +3,16 @@ import Decisions from "@/components/case-study/Decisions"
 import Glance from "@/components/case-study/Glance"
 import StudyHero from "@/components/case-study/StudyHero"
 import StudyReader from "@/components/case-study/StudyReader"
+import StudyVideo from "@/components/case-study/StudyVideo"
 import { pill } from "@/components/ui/pill"
 import { caseStudies } from "@/data/case-studies"
 import { projects } from "@/data/projects"
 import { isMorphState } from "@/lib/viewTransition"
 import NotFound from "@/pages/404"
 
-/**
- * A project told in depth: the mark and facts, a few checkable numbers, a
- * reader that pairs each idea with its diagram or screen, the decisions and
- * their costs, and what I'd change. Unknown slugs and projects without a case
- * study get the 404 page.
- */
 export default function CaseStudy() {
   const { slug = "" } = useParams()
   const location = useLocation()
-  // App clears the flag on reloads and history moves, so this is only true right after a morph.
   const arrivedByMorph = isMorphState(location.state)
   const project = projects.find((item) => item.id === slug && item.caseStudy)
   const study = caseStudies[slug]
@@ -28,6 +22,7 @@ export default function CaseStudy() {
   return (
     <main id="main">
       <StudyHero project={project} study={study} arrivedByMorph={arrivedByMorph} />
+      {study.video && <StudyVideo video={study.video} />}
       <Glance stats={study.glance} />
 
       <div className="wrap">

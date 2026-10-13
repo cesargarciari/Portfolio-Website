@@ -21,9 +21,7 @@ interface Term {
 
 interface Entry {
   hit: SearchHit
-  /** Stack, skills, names: matched exactly or by prefix-like substring. */
   strong: Term[]
-  /** Words from the one-line description: matched exactly only. */
   weak: Set<string>
 }
 
@@ -33,7 +31,7 @@ export const numberWord = (n: number) => NUMBER_WORDS[n] ?? String(n)
 
 const count = (n: number, noun: string) => `${numberWord(n)} ${noun}${n === 1 ? "" : "s"}`
 
-/** Lowercase, strip accents and punctuation, keep # and + so C# and C++ survive. */
+// Keeps # and + so C# and C++ survive.
 const normalize = (value: string) =>
   value
     .toLowerCase()
@@ -107,13 +105,12 @@ function matchesLoosely(token: string, entry: Entry) {
   return token.length >= 3 && entry.strong.some((term) => term.key.includes(token))
 }
 
-/** Exact hits win ("java" is not "javascript"); partial words only count when nothing is exact. */
+// Exact hits win ("java" is not "javascript"); partial matches only count when nothing is exact.
 function entriesFor(token: string) {
   const exact = ENTRIES.filter((entry) => matchesExactly(token, entry))
   return exact.length > 0 ? exact : ENTRIES.filter((entry) => matchesLoosely(token, entry))
 }
 
-/** The display name for a token: the spelling used in the data when there is one. */
 function labelFor(raw: string, token: string) {
   const target = ALIASES[token]?.[0] ?? token
   for (const entry of ENTRIES) {
@@ -125,10 +122,6 @@ function labelFor(raw: string, token: string) {
 
 const EASTER_EGG = new Set(["pupusa", "pupusas"])
 
-/**
- * Searches projects and roles by language, tool, company, or keyword.
- * Plain questions work too ("have you used AWS?"): filler words are ignored.
- */
 export function searchWork(query: string): SearchResult {
   const pairs = query
     .split(/[\s,?!/]+/)

@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from "react"
+import { useId, useLayoutEffect, useRef, useState } from "react"
 import { motion, useInView, useReducedMotion } from "motion/react"
 import type { DiagramEdge, DiagramNode, DiagramSpec } from "@/components/diagram/types"
 import { EASE_OUT } from "@/lib/motion"
@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils"
 interface ArchDiagramProps {
   spec: DiagramSpec
   className?: string
-  /** Whether boxes take keyboard focus. Off for copies that are hidden or only there for screen readers. */
   focusable?: boolean
 }
 
@@ -16,14 +15,14 @@ interface Point {
   y: number
 }
 
-/** Space between an edge's end and the box it points at. */
 const EDGE_GAP = 6
 const ARROW_LENGTH = 8
 const ARROW_HALF_WIDTH = 4.5
+const LABEL_PAD_X = 6
+const LABEL_PAD_Y = 3
 
 const centre = (node: DiagramNode): Point => ({ x: node.x + node.w / 2, y: node.y + node.h / 2 })
 
-/** Where the line from `node`'s centre toward `toward` leaves the box, pushed out by `gap`. */
 function exitPoint(node: DiagramNode, toward: Point, gap: number): Point {
   const c = centre(node)
   const dx = toward.x - c.x
@@ -39,6 +38,16 @@ interface EdgeGeometry {
   arrow: string
   label: Point
 }
+
+type LabelBox = DOMRect | null
+
+const sameBoxes = (a: LabelBox[], b: LabelBox[]) =>
+  a.length === b.length &&
+  a.every((box, i) => {
+    const other = b[i]
+    if (!box || !other) return box === other
+    return box.x === other.x && box.y === other.y && box.width === other.width && box.height === other.height
+  })
 
 function edgeGeometry(edge: DiagramEdge, nodes: Map<string, DiagramNode>): EdgeGeometry | null {
   const from = nodes.get(edge.from)
@@ -66,17 +75,34 @@ function edgeGeometry(edge: DiagramEdge, nodes: Map<string, DiagramNode>): EdgeG
   }
 }
 
-/**
- * A system diagram drawn from data in the site's own tokens, so it follows the
- * theme and the type. Edges draw themselves once when the figure comes into
- * view. Hovering or focusing a box lights its connections and shows its note.
- */
 export default function ArchDiagram({ spec, className, focusable = true }: ArchDiagramProps) {
   const ref = useRef<SVGSVGElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.4 })
   const reduce = useReducedMotion()
   const [activeId, setActiveId] = useState<string | null>(null)
   const titleId = useId()
+  const labelRefs = useRef<(SVGTextElement | null)[]>([])
+  const [labelBoxes, setLabelBoxes] = useState<LabelBox[]>([])
+
+  useLayoutEffect(() => {
+    const svg = ref.current
+    if (!svg) return
+    const measure = () => {
+      // Unrendered text can't be measured (Firefox throws); the observer retries once it's shown.
+      if (svg.getClientRects().length === 0) return
+      const next = labelRefs.current.map((text) => text?.getBBox() ?? null)
+      setLabelBoxes((prev) => (sameBoxes(prev, next) ? prev : next))
+    }
+    let live = true
+    measure()
+    document.fonts.ready.then(() => live && measure())
+    const observer = new ResizeObserver(measure)
+    observer.observe(svg)
+    return () => {
+      live = false
+      observer.disconnect()
+    }
+  }, [spec])
 
   const nodes = new Map(spec.nodes.map((node) => [node.id, node]))
   const active = activeId ? nodes.get(activeId) : undefined
@@ -85,6 +111,14 @@ export default function ArchDiagram({ spec, className, focusable = true }: ArchD
     activeId ? spec.edges.filter(touches).flatMap((edge) => [edge.from, edge.to]) : [],
   )
   const drawn = reduce || inView
+  const edges = spec.edges.map((edge, index) => ({
+    edge,
+    index,
+    geometry: edgeGeometry(edge, nodes),
+    lit: activeId ? touches(edge) : edge.highlight,
+    dimmed: activeId !== null && !touches(edge),
+    delay: reduce ? 0 : 0.15 + index * 0.08,
+  }))
 
   return (
     <div className={cn("flex w-full flex-col", className)}>
@@ -97,13 +131,9 @@ export default function ArchDiagram({ spec, className, focusable = true }: ArchD
       >
         <title id={titleId}>{spec.title}</title>
 
-        {spec.edges.map((edge, index) => {
-          const geometry = edgeGeometry(edge, nodes)
+        {edges.map(({ edge, geometry, lit, dimmed, delay }) => {
           if (!geometry) return null
-          const lit = activeId ? touches(edge) : edge.highlight
-          const dimmed = activeId !== null && !touches(edge)
           const stroke = lit ? "var(--deep)" : "var(--line-mid)"
-          const delay = reduce ? 0 : 0.15 + index * 0.08
 
           return (
             <g
@@ -133,8 +163,40 @@ export default function ArchDiagram({ spec, className, focusable = true }: ArchD
                 animate={drawn ? { opacity: 1 } : undefined}
                 transition={{ duration: reduce ? 0 : 0.2, delay: reduce ? 0 : delay + 0.45 }}
               />
-              {edge.label && (
-                <motion.text
+            </g>
+          )
+        })}
+
+        {edges.map(({ edge, index, geometry, lit, dimmed, delay }) => {
+          if (!geometry || !edge.label) return null
+          const box = labelBoxes[index]
+
+          return (
+            <g
+              key={`${edge.from}-${edge.to}-label`}
+              aria-hidden
+              className="transition-opacity duration-260"
+              style={{ opacity: dimmed ? 0.3 : 1 }}
+            >
+              <motion.g
+                initial={{ opacity: 0 }}
+                animate={drawn ? { opacity: 1 } : undefined}
+                transition={{ duration: reduce ? 0 : 0.3, delay: reduce ? 0 : delay + 0.3 }}
+              >
+                {box && box.width > 0 && (
+                  <rect
+                    x={box.x - LABEL_PAD_X}
+                    y={box.y - LABEL_PAD_Y}
+                    width={box.width + LABEL_PAD_X * 2}
+                    height={box.height + LABEL_PAD_Y * 2}
+                    rx={6}
+                    fill="var(--ground-raised)"
+                  />
+                )}
+                <text
+                  ref={(text) => {
+                    labelRefs.current[index] = text
+                  }}
                   x={geometry.label.x}
                   y={geometry.label.y}
                   dy="0.35em"
@@ -142,17 +204,10 @@ export default function ArchDiagram({ spec, className, focusable = true }: ArchD
                   fontSize={12.5}
                   letterSpacing="-0.01em"
                   fill={lit ? "var(--ink)" : "var(--ink-65)"}
-                  stroke="var(--ground-raised)"
-                  strokeWidth={6}
-                  strokeLinejoin="round"
-                  paintOrder="stroke"
-                  initial={{ opacity: 0 }}
-                  animate={drawn ? { opacity: 1 } : undefined}
-                  transition={{ duration: reduce ? 0 : 0.3, delay: reduce ? 0 : delay + 0.3 }}
                 >
                   {edge.label}
-                </motion.text>
-              )}
+                </text>
+              </motion.g>
             </g>
           )
         })}
@@ -179,7 +234,6 @@ export default function ArchDiagram({ spec, className, focusable = true }: ArchD
                 y={node.y}
                 width={node.w}
                 height={node.h}
-                // Stores read as pills, services and clients as rounded boxes.
                 rx={node.kind === "store" ? node.h / 2 : 14}
                 fill="var(--ground)"
                 stroke={lit ? "var(--deep)" : "var(--line-mid)"}
@@ -216,7 +270,6 @@ export default function ArchDiagram({ spec, className, focusable = true }: ArchD
         })}
       </svg>
 
-      {/* Visual only: each box's label already carries its note for screen readers. */}
       <p aria-hidden className="t-small mt-4 min-h-[3em] max-w-[52ch] text-ink-65">
         {active?.note ? (
           <>

@@ -22,10 +22,6 @@ function Field({ term, children }: FieldProps) {
   )
 }
 
-/**
- * Each decision as a ledger row in one fixed shape (the call, what else was on
- * the table, why, and what it cost), so they can be compared at a glance.
- */
 export default function Decisions({ decisions }: DecisionsProps) {
   return (
     <section aria-labelledby="decisions-title" className="wrap pb-section-lg pt-section">

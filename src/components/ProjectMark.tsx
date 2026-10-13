@@ -9,14 +9,9 @@ interface ProjectMarkProps {
   ref?: Ref<HTMLSpanElement>
 }
 
-/**
- * Each project's own app icon. Its colours are the product's identity, like a
- * poster, so they sit outside the site palette. Sources are 320px crops of the
- * originals in public/, trimmed to the icon's edges: twice the largest size the
- * mark is shown at (the case study hero).
- */
 const MARKS: Record<ProjectIcon, string> = {
   chipy: "/chipy-logo-320.png",
+  braindump: "/braindump/logo.svg",
 }
 
 export default function ProjectMark({ icon, className, style, ref }: ProjectMarkProps) {

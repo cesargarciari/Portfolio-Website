@@ -8,10 +8,6 @@ import { pill } from "@/components/ui/pill"
 import { featuredProjects, projects } from "@/data/projects"
 import { numberWord } from "@/lib/search"
 
-/**
- * The home page reads as one story, top to bottom: a greeting you can ask
- * questions of, who I am, what I've built, how I got here, and an invitation.
- */
 export default function Home() {
   return (
     <main id="main">

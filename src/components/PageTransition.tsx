@@ -6,12 +6,6 @@ interface PageTransitionProps {
   children: ReactNode
 }
 
-/**
- * Crossfades routes so the swap never teleports. It's opacity only: each
- * page's own `.enter` stagger does the rising and focusing, and stacking
- * two movements would blur the one orchestrated entrance.
- * Exit is quicker than enter since AnimatePresence (mode="wait") plays it first.
- */
 export default function PageTransition({ children }: PageTransitionProps) {
   return (
     <motion.div

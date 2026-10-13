@@ -1,6 +1,5 @@
 import { skillCategories } from "@/data/skills"
 
-/** A ledger: plain text in columns, no boxes, no logos. */
 export default function Toolbox() {
   return (
     <section aria-labelledby="toolbox-title" className="py-section-lg">

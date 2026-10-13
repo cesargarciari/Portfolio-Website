@@ -1,5 +1,4 @@
-/** App icons shown by ProjectMark; only projects with a case study have one so far. */
-export type ProjectIcon = "chipy"
+export type ProjectIcon = "chipy" | "braindump"
 
 export interface Project {
   id: string
@@ -9,11 +8,9 @@ export interface Project {
   stack: string[]
   date: string
   year: number
-  /** Shown in the short list on the home page. */
   featured?: boolean
   github?: string
   live?: string
-  /** Has a full case study at /projects/:id (see src/data/case-studies). */
   caseStudy?: boolean
   icon?: ProjectIcon
 }
@@ -24,7 +21,7 @@ export const projects: Project[] = [
     name: "Chipy",
     tagline: "Full-stack NBA career simulator with deterministic, seeded-RNG engine running client and server side.",
     description:
-      "Pure TypeScript engine (seeded RNG) runs client-side for instant offline play and server-side as source of truth on career save/share. Ships as serverless AWS stack (S3/CloudFront, Lambda, DynamoDB), Terraform-provisioned, GitHub Actions deploy. Monorepo, one shared zod-validated API contract between client and server.",
+      "Pure TypeScript engine (seeded RNG) runs client-side for instant offline play and server-side as source of truth for saving and sharing careers, which go public next. Ships as serverless AWS stack (S3/CloudFront, Lambda, DynamoDB), Terraform-provisioned, GitHub Actions deploy. Monorepo, one shared zod-validated API contract between client and server.",
     stack: ["TypeScript", "AWS", "Terraform", "Lambda", "DynamoDB", "CloudFront", "Zod", "GitHub Actions"],
     date: "Aug 2026 – now",
     year: 2026,
@@ -36,15 +33,16 @@ export const projects: Project[] = [
   {
     id: "braindump",
     name: "BrainDump",
-    tagline: "A cognitive relief tool designed to reduce overwhelm by narrowing focus to 3–4 tasks using AI-driven triage.",
+    tagline: "A cognitive relief tool that cuts overwhelm down to the three tasks that matter most, using AI-driven triage.",
     description:
-      "An AI-powered cognitive relief tool that helps users cut through mental noise. Paste your overwhelming task list and let GPT-4o triage it down to 3–4 actionable priorities. Features drag-and-drop reordering, AI voice readback via OpenAI TTS, and persistent task state backed by Supabase.",
+      "An AI-powered cognitive relief tool that helps users cut through mental noise. Type, speak, or drop files into one box and OpenAI pulls out tasks with due dates, while a Do now column holds the three that matter most. Features drag-and-drop reordering, AI voice readback via OpenAI TTS, and persistent task state backed by Supabase.",
     stack: ["Next.js", "TypeScript", "Supabase", "OpenAI", "Tailwind CSS", "shadcn/ui", "@dnd-kit"],
     date: "Mar 2026",
     year: 2026,
     featured: true,
     github: "https://github.com/ZeengFong/CursorHackathon/",
-    live: "https://braindump.lucasuanez.codes",
+    caseStudy: true,
+    icon: "braindump",
   },
   {
     id: "unify",

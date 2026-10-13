@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils"
 interface StudyHeroProps {
   project: Project
   study: CaseStudy
-  /** The mark flew in from the index, so it is already in place and skips the entrance. */
   arrivedByMorph: boolean
 }
 
@@ -29,14 +28,10 @@ function MetaItem({ term, children }: MetaItemProps) {
   )
 }
 
-/**
- * The project's mark lands first (from the index when you arrive by clicking),
- * then the name, the one-sentence summary, and the facts build in around it.
- */
 export default function StudyHero({ project, study, arrivedByMorph }: StudyHeroProps) {
   const mark = project.icon
   return (
-    <section className="wrap pb-section pt-[6svh]">
+    <section className={cn("wrap pb-section pt-[6svh]", arrivedByMorph && "enter-sharp")}>
       <Link to="/projects" className={cn(pill({ variant: "tertiary", size: "sm" }), "enter -ml-3")} style={stagger(0)}>
         All projects
       </Link>
@@ -44,9 +39,8 @@ export default function StudyHero({ project, study, arrivedByMorph }: StudyHeroP
       <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-10">
         {mark && (
           <span
-            // MORPH_TARGET_ATTR: tells the view transition the new page is ready to snapshot.
             data-morph-target=""
-            // Named only for the morph, so theme switches don't animate the mark as its own layer.
+            // Named only during the morph, so theme switches don't animate the mark as its own layer.
             style={arrivedByMorph ? { viewTransitionName: MORPH_NAME } : undefined}
             className={cn("block size-[clamp(6rem,4.5rem+5vw,9.5rem)] shrink-0", !arrivedByMorph && "enter")}
           >

@@ -11,10 +11,6 @@ const SUGGESTIONS = ["AWS", "TypeScript", "Python", "Next.js", "PostgreSQL", "C#
 
 const sameTerm = (a: string, b: string) => a.trim().toLowerCase() === b.toLowerCase()
 
-/**
- * The instrument: a recruiter's first question is "has he worked with X?",
- * so the hero answers it against the real projects and roles.
- */
 export default function WorkSearch() {
   const [query, setQuery] = useState("")
   const [dismissed, setDismissed] = useState(false)
@@ -27,7 +23,6 @@ export default function WorkSearch() {
   const result = useMemo(() => searchWork(query), [query])
   const open = query.trim().length > 0 && !dismissed
 
-  // Clicking anywhere else tucks the results away; focusing the field brings them back.
   useEffect(() => {
     if (!open) return
     const onPointerDown = (event: PointerEvent) => {

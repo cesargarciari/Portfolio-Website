@@ -2,7 +2,7 @@ import type { CaseStudy } from "./types"
 
 export const chipy: CaseStudy = {
   slug: "chipy",
-  summary: "An NBA career simulator whose engine runs in your browser and again on the server.",
+  summary: "An NBA career simulator that runs entirely in your browser, built so a server can replay every career.",
   role: "Solo project: game design, engine, API, and infrastructure",
   timeline: "August 2026 to now",
   stack: ["TypeScript", "React 19", "Fastify 5", "Zod", "AWS Lambda", "DynamoDB", "CloudFront", "Terraform", "GitHub Actions"],
@@ -10,7 +10,7 @@ export const chipy: CaseStudy = {
   liveLabel: "Play Chipy",
   glance: [
     { value: "120", label: "random careers replayed byte for byte on every test run" },
-    { value: "1", label: "secondary index serves the whole leaderboard, with no scans" },
+    { value: "32", label: "offseason scenarios, each one a plain data object" },
     { value: "5", label: "Terraform modules provision the entire stack" },
     { value: "~$0", label: "idle cost, because every piece bills on demand" },
   ],
@@ -24,30 +24,36 @@ export const chipy: CaseStudy = {
       ],
       media: {
         kind: "screen",
-        src: "/case-studies/chipy/create-player.webp",
-        alt: "Chipy’s create player screen with position, archetype, and country choices",
+        src: "/chipy/create-player.webp",
+        alt: "Chipy’s create your prospect screen: name, jersey number, birth country, shooting hand, position, and archetype cards, beside a live jersey preview",
         width: 1600,
-        height: 1000,
-        caption: "Creating a prospect.",
-        pending: true,
+        height: 1536,
+        caption: "Creating a prospect. The jersey on the right updates as you type.",
+      },
+    },
+    {
+      id: "cards",
+      title: "Every call shows its price before you make it.",
+      paragraphs: [
+        "Each decision is a card with its exact effects printed on it: plus seven finishing, plus a million dollars, a tag for what it commits you to. There is no hidden roll on a choice’s effect, so the card always tells the truth, and the player card beside it lights up the ratings an option would move.",
+        "The content is data, not code. The 32 offseason scenarios live in nine themed files, and adding one means appending an object. The 30 archetypes (six per position), the 30 NBA teams, and a full EuroLeague with its own clubs and trophies are data files too.",
+      ],
+      media: {
+        kind: "screen",
+        src: "/chipy/decision-card.webp",
+        alt: "An offseason decision asking what kind of player you are, with three option cards showing their exact rating effects, beside the player card with overall, fame, money, and ratings",
+        width: 1600,
+        height: 1517,
+        caption: "An offseason decision. Every option shows its exact effect before you pick.",
       },
     },
     {
       id: "problem",
-      title: "A career game is only worth playing if the stats can’t be faked.",
+      title: "A shared career is only worth something if the stats can’t be faked.",
       paragraphs: [
-        "Careers can be saved, shared by link, and ranked on a monthly leaderboard. The moment there is a leaderboard, someone will edit the request and send a 99 overall with twelve rings.",
+        "Saving a career, sharing it by link, and a monthly leaderboard are the next milestone. The moment scores are public, someone will edit the request and send a 99 overall with twelve rings, so the trust model came first, before any of those features went live.",
         "It also had to feel instant. A server round trip on every offseason decision would kill the pace, and I wanted the game to keep working on a train with no signal. So the simulation had to run on the device, and the server still had to be the source of truth.",
       ],
-      media: {
-        kind: "screen",
-        src: "/case-studies/chipy/decision-card.webp",
-        alt: "An offseason decision card listing each option’s effect on stats and money",
-        width: 1600,
-        height: 1000,
-        caption: "An offseason decision, with its effects shown up front.",
-        pending: true,
-      },
     },
     {
       id: "architecture",
@@ -55,10 +61,11 @@ export const chipy: CaseStudy = {
       paragraphs: [
         "CloudFront serves the built app from a private S3 bucket and forwards /api/* to a Lambda Function URL running Fastify. Both sit behind the same distribution, so the browser only ever talks to one origin: no CORS, and no API Gateway in front of the function.",
         "Lambda and DynamoDB both bill on demand, so the stack costs close to nothing while nobody is playing. Terraform provisions it in five modules (static site, API, data, DNS, observability), and GitHub Actions deploys once the checks pass.",
+        "The game needs none of the API to play: every career runs in the browser. The API is built and tested for saving, sharing by link, and a monthly leaderboard, which go public next.",
       ],
       media: {
         kind: "diagram",
-        caption: "Follow the accent: a save travels from the browser through CloudFront to Lambda, which writes one table.",
+        caption: "Follow the accent: the path a save will take, from the browser through CloudFront to Lambda and one table.",
         spec: {
           id: "chipy-system",
           title: "Chipy system architecture",
@@ -123,7 +130,7 @@ export const chipy: CaseStudy = {
               id: "db",
               label: "DynamoDB",
               sub: "single table, on demand",
-              note: "Careers, the monthly leaderboard index, and choice counters, all in one table.",
+              note: "Saved careers, choice counters, and the index a monthly leaderboard will read, all in one table.",
               x: 416,
               y: 400,
               w: 200,
@@ -159,7 +166,7 @@ export const chipy: CaseStudy = {
       title: "The server replays your career instead of trusting it.",
       paragraphs: [
         "The engine is a pure TypeScript package with a seeded random number generator. Given the same seed, profile, and list of choices, it produces the same career, byte for byte, in any JavaScript runtime.",
-        "The browser runs it for instant, offline play. When you save, the client sends only the inputs. The API runs the same engine on them and stores its own result, so an edited request can change what you chose, but never what those choices produced.",
+        "The browser runs it for instant, offline play. Saving is built the same way, ready for when it goes public: the client sends only the inputs, and the API runs the same engine on them and stores its own result. An edited request can change what you chose, but never what those choices produced.",
         "The price is discipline: nothing inside the engine may read the clock or call Math.random. A new game’s seed is the only random number, and it is picked outside the simulation.",
       ],
       media: {
@@ -228,7 +235,7 @@ export const chipy: CaseStudy = {
               id: "saved",
               label: "The career that’s saved",
               sub: "the server’s own result",
-              note: "What the leaderboard and share links read. Identical to what you saw, because the engine is deterministic.",
+              note: "What share links and the planned leaderboard will read. Identical to what you saw, because the engine is deterministic.",
               x: 376,
               y: 296,
               w: 240,
@@ -244,23 +251,6 @@ export const chipy: CaseStudy = {
             { from: "engine-server", to: "saved", label: "stored", highlight: true },
           ],
         },
-      },
-    },
-    {
-      id: "data",
-      title: "The leaderboard was designed before the table.",
-      paragraphs: [
-        "Everything lives in one DynamoDB table. A career is stored under CAREER#id. The leaderboard is a single secondary index keyed by month, with the padded legacy score as the sort key, so a month’s top careers are one query in descending order. Choice statistics (how many players took each option) are counters bumped with atomic updates.",
-        "There are no scans on the hot path, and with on-demand billing a quiet month costs almost nothing. The trade is that every access pattern had to be known up front: a new way to slice careers means a new index or a backfill.",
-      ],
-      media: {
-        kind: "screen",
-        src: "/case-studies/chipy/leaderboard.webp",
-        alt: "The monthly leaderboard ranking saved careers by legacy score",
-        width: 1600,
-        height: 1000,
-        caption: "This month’s leaderboard: one query against one index.",
-        pending: true,
       },
     },
     {
@@ -351,12 +341,11 @@ export const chipy: CaseStudy = {
       ],
       media: {
         kind: "screen",
-        src: "/case-studies/chipy/legacy.webp",
-        alt: "The legacy screen with a trophy case, career totals, and a Hall of Fame verdict",
-        width: 1600,
-        height: 1000,
+        src: "/chipy/legacy.webp",
+        alt: "The legacy screen for #5 LeBron: a B legacy grade, Hall of Fame, a ratings radar, career totals and earnings, and a trophy case with a championship, an All-Star selection, and Olympic silver",
+        width: 1246,
+        height: 1600,
         caption: "The legacy screen, built from the summary the determinism test compares.",
-        pending: true,
       },
     },
   ],
@@ -364,7 +353,7 @@ export const chipy: CaseStudy = {
     {
       title: "Run the same engine on the client and the server.",
       options: "Simulate only on the server, or trust the client’s result.",
-      why: "Server-only adds a round trip to every decision and breaks offline play. Trusting the client makes the leaderboard meaningless. Replaying the inputs gives both speed and a source of truth.",
+      why: "Server-only adds a round trip to every decision and breaks offline play. Trusting the client would make shared careers and the planned leaderboard meaningless. Replaying the inputs gives both speed and a source of truth.",
       cost: "The engine has to stay pure for good: no Date.now(), no Math.random(), and any rule change is a new engine version.",
     },
     {
@@ -376,7 +365,7 @@ export const chipy: CaseStudy = {
     {
       title: "Keep everything in one DynamoDB table.",
       options: "Postgres on RDS, or one table per entity.",
-      why: "The access patterns are few and known: get a career, list a month’s leaderboard, bump choice counters. One table answers each with a single request and costs almost nothing at rest.",
+      why: "The planned access patterns are few and known: get a saved career, list a month’s leaderboard, bump choice counters. One table answers each with a single request and costs almost nothing at rest.",
       cost: "Access patterns are designed up front. A new question means a new index or a backfill, not a new SQL query.",
     },
     {

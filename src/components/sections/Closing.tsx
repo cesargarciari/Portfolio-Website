@@ -3,12 +3,6 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { pill } from "@/components/ui/pill"
 import { profile } from "@/data/profile"
 
-/**
- * The page's one mood shift. It wears the opposite palette (night cobalt on a
- * light page, flag white on a dark one) and opens from an inset card to the
- * full screen as it scrolls into place, so the change of ground feels like
- * stepping outside rather than a cut.
- */
 export default function Closing() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()

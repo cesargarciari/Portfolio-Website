@@ -17,15 +17,9 @@ const ITEMS: DockItem[] = [
   { to: "/experience", label: "Experience" },
 ]
 
-/** Distance scrolled in one direction before the dock steps aside or comes back. */
 const HIDE_AFTER = 64
 const SHOW_AFTER = 24
 
-/**
- * Primary navigation, docked at the bottom. It slides away while you scroll
- * down to read and returns as soon as you scroll back up, reach the end of the
- * page, or move keyboard focus into it.
- */
 export default function Dock() {
   const { pathname } = useLocation()
   const scrollTo = useScrollTo()
@@ -56,7 +50,6 @@ export default function Dock() {
     if (heading === "up" && travelled > SHOW_AFTER) setHidden(false)
   })
 
-  // Re-selecting the page you're on glides back to its top instead of doing nothing.
   const onSamePage = (to: string) => (event: MouseEvent) => {
     if (pathname !== to) return
     event.preventDefault()
