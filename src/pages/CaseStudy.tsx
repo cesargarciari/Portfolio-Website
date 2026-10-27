@@ -54,6 +54,11 @@ export default function CaseStudy() {
               {study.liveLabel ?? "Visit the site"}
             </a>
           )}
+          {study.github && (
+            <a href={study.github} target="_blank" rel="noopener noreferrer" className={pill({ variant: study.live ? "secondary" : "primary" })}>
+              Read the code
+            </a>
+          )}
           <Link to="/projects" className={pill({ variant: "secondary" })}>
             See all projects
           </Link>

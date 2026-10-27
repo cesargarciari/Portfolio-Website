@@ -1,4 +1,4 @@
-export type ProjectIcon = "chipy" | "braindump"
+export type ProjectIcon = "chipy" | "braindump" | "findit"
 
 export interface Project {
   id: string
@@ -17,13 +17,27 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "findit",
+    name: "FindIt",
+    tagline: "A private macOS app that finds a screenshot from a description in English or Spanish, entirely on-device.",
+    description:
+      "Each screenshot is read with Apple Vision, described by a local vision model through Ollama, and indexed twice: as keyword text in SQLite FTS5 and as a bge-m3 vector. Search merges both with weighted reciprocal rank fusion, tuned against a 250-query golden set with a held-out test split. Nothing leaves the Mac.",
+    stack: ["Swift", "SwiftUI", "Apple Vision", "Ollama", "SQLite", "GRDB"],
+    date: "Oct 2026",
+    year: 2026,
+    featured: true,
+    github: "https://github.com/cesargarciari/FindIt",
+    caseStudy: true,
+    icon: "findit",
+  },
+  {
     id: "chipy",
     name: "Chipy",
     tagline: "Full-stack NBA career simulator with deterministic, seeded-RNG engine running client and server side.",
     description:
       "Pure TypeScript engine (seeded RNG) runs client-side for instant offline play and server-side as source of truth for saving and sharing careers, which go public next. Ships as serverless AWS stack (S3/CloudFront, Lambda, DynamoDB), Terraform-provisioned, GitHub Actions deploy. Monorepo, one shared zod-validated API contract between client and server.",
     stack: ["TypeScript", "AWS", "Terraform", "Lambda", "DynamoDB", "CloudFront", "Zod", "GitHub Actions"],
-    date: "Aug 2026 – now",
+    date: "Aug – Oct 2026",
     year: 2026,
     featured: true,
     live: "https://chipy.cesargarciar.dev",

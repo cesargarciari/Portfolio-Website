@@ -13,6 +13,7 @@
   --brand-deep: #0f47af;
   --brand-on-deep: #fcfdff;
   --brand-signal: #c28a0c;
+  --brand-live: #d92d20;
   --brand-link: #2b55b8;
   --brand-shadow: #070f21;
   --brand-shadow-k: 1;
@@ -30,6 +31,7 @@
   --brand-deep: #8eb0ff;
   --brand-on-deep: #07102a;
   --brand-signal: #d4a24c;
+  --brand-live: #ff5c50;
   --brand-link: #a3bdf5;
   --brand-shadow: #000000;
   --brand-shadow-k: 5;
@@ -66,6 +68,7 @@
   --deep: var(--brand-deep);
   --on-deep: var(--brand-on-deep);
   --signal: var(--brand-signal);
+  --live: var(--brand-live);
   --link: var(--brand-link);
 
   --shadow-1: 0 10px 40px color-mix(in srgb, var(--brand-shadow) calc(8% * var(--brand-shadow-k)), transparent),
@@ -146,6 +149,7 @@
   --color-deep: var(--deep);
   --color-on-deep: var(--on-deep);
   --color-signal: var(--signal);
+  --color-live: var(--live);
   --color-link: var(--link);
 }
 
