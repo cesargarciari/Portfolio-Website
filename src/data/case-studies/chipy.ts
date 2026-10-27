@@ -4,7 +4,7 @@ export const chipy: CaseStudy = {
   slug: "chipy",
   summary: "An NBA career simulator that runs entirely in your browser, built so a server can replay every career.",
   role: "Solo project: game design, engine, API, and infrastructure",
-  timeline: "August 2026 to now",
+  timeline: "August to October 2026",
   stack: ["TypeScript", "React 19", "Fastify 5", "Zod", "AWS Lambda", "DynamoDB", "CloudFront", "Terraform", "GitHub Actions"],
   live: "https://chipy.cesargarciar.dev",
   liveLabel: "Play Chipy",

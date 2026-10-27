@@ -3,7 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } f
 import Glyph, { type GlyphName } from "@/components/sections/Glyph"
 
 const SENTENCE =
-  "I grew up among the {volcano:volcanoes} of El Salvador and studied software engineering under the {mountain:Rockies} in Calgary. I like to build full-stack web apps and cloud services, from the {database:database} to the last {cursor:pixel} ."
+  "I grew up among the {volcano:volcanoes} of El Salvador and studied software engineering under the {mountain:Rockies} in Calgary. I like to build full-stack web apps and cloud services"
 
 interface Token {
   word: string

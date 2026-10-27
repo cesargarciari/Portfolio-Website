@@ -62,7 +62,10 @@ function ProjectEntry({ project, onActive }: ProjectEntryProps) {
         <span>{project.date}</span>
         {project.live && (
           <span className="inline-flex items-center gap-2 text-ink-65">
-            <span aria-hidden className="size-1.5 rounded-full bg-signal" />
+            <span aria-hidden className="relative flex size-1.5">
+              <span className="absolute inset-0 rounded-full bg-live opacity-75 motion-safe:animate-ping" />
+              <span className="relative size-1.5 rounded-full bg-live" />
+            </span>
             Live
           </span>
         )}

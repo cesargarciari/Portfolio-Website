@@ -12,6 +12,7 @@ interface ProjectMarkProps {
 const MARKS: Record<ProjectIcon, string> = {
   chipy: "/chipy-logo-320.png",
   braindump: "/braindump/logo.svg",
+  findit: "/FindIt/logo-320.png",
 }
 
 export default function ProjectMark({ icon, className, style, ref }: ProjectMarkProps) {

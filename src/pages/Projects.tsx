@@ -18,8 +18,8 @@ export default function Projects() {
           Everything I’ve built so far.
         </h1>
         <p className="t-lead enter mt-6 max-w-[44ch] text-ink-65" style={stagger(1)}>
-          {capitalize(numberWord(projects.length))} projects, from an AI professor-review summarizer in {oldest.year} to a serverless
-          NBA career simulator I’m building now.
+          {capitalize(numberWord(projects.length))} projects, from an AI professor-review summarizer in {oldest.year} to a private
+          screenshot search app that runs entirely on a Mac.
         </p>
       </section>
 
