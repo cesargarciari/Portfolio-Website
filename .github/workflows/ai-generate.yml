@@ -1,70 +1,78 @@
 name: AI Code Generation
-
+ 
 on:
   issues:
     types: [labeled]
-
+ 
 jobs:
   generate:
-
-    if: github.event.label.name == 'ai-generate'
+    # Run only when the ai-generate label is added to an issue
+    # opened by the repo owner. Issues from anyone else are ignored.
+    if: |
+      github.event.label.name == 'ai-generate' &&
+      github.event.issue.user.login == github.repository_owner
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
       issues: write
-
+ 
     steps:
       - uses: actions/checkout@v4
-
+ 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-
+ 
       - name: Install dependencies
         run: npm install @anthropic-ai/sdk
-
+ 
+      # Issue text is passed through env variables, never pasted into
+      # the script. "$ISSUE_TITLE" is treated as plain text by the shell.
       - name: Generate code
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
-          node .github/scripts/generate.js \
-            "${{ github.event.issue.title }}" \
-            "${{ github.event.issue.body }}"
-
+          node .github/scripts/generate.js "$ISSUE_TITLE" "$ISSUE_BODY"
+ 
       - name: Create branch and PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          BRANCH="ai/issue-${{ github.event.issue.number }}"
+          BRANCH="ai/issue-$ISSUE_NUMBER"
           git config user.name "AI Agent"
           git config user.email "ai-agent@users.noreply.github.com"
-          git checkout -b $BRANCH
+          git checkout -b "$BRANCH"
           git add -A
-          git commit -m "feat: ${{ github.event.issue.title }}"
-          git push origin $BRANCH
-
+          git commit -m "feat: $ISSUE_TITLE"
+          git push origin "$BRANCH"
+ 
           if [ -f .github/scripts/pr-summary.txt ]; then
             SUMMARY=$(cat .github/scripts/pr-summary.txt)
           else
             SUMMARY="No summary available."
           fi
-
+ 
           gh pr create \
-            --title "AI: ${{ github.event.issue.title }}" \
-            --body "Closes #${{ github.event.issue.number }}
-
+            --title "AI: $ISSUE_TITLE" \
+            --body "Closes #$ISSUE_NUMBER
+ 
           $SUMMARY
-
+ 
           - [ ] Code follows project conventions
           - [ ] No unintended changes
           - [ ] Looks good to deploy" \
             --base main \
-            --head $BRANCH
-
+            --head "$BRANCH"
+ 
       - name: Comment on issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          gh issue comment ${{ github.event.issue.number }} \
+          gh issue comment "$ISSUE_NUMBER" \
             --body "🤖 PR created! Greptile is reviewing the code now."

@@ -6,12 +6,16 @@ on:
 
 jobs:
   auto-merge:
-    #  auto-merge if:
-    # • it's an AI-generated PR 
+    # Auto-merge only if:
+    # • the branch starts with ai/
+    # • the branch lives in this repo, not in a fork
     # • the review is an approval
+    # • the approval comes from the repo owner
     if: |
       startsWith(github.event.pull_request.head.ref, 'ai/') &&
-      github.event.review.state == 'approved'
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.review.state == 'approved' &&
+      github.event.review.user.login == github.repository_owner
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,7 +25,6 @@ jobs:
       - name: Auto merge on approval
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          gh pr merge ${{ github.event.pull_request.number }} \
-            --squash \
-            --repo ${{ github.repository }}
+          gh pr merge "$PR_NUMBER" --squash --repo "$GITHUB_REPOSITORY"
